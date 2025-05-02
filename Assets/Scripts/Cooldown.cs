@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Cooldown
 {
-    private WaitForSeconds _delay;
+    private readonly WaitForSeconds _delay;
 
     public Cooldown(float delaySeconds)
     {
@@ -19,6 +19,7 @@ public class Cooldown
 
         yield return _delay;
 
+        // 0.8299966
         IsFree = true;
     }
 }

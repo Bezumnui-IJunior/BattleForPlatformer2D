@@ -46,11 +46,18 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.47f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Player\StateTracker.cs" />
     <Compile Include="Assets\Scripts\Cooldown.cs" />
+    <Compile Include="Assets\Scripts\Player\KeyboardMove.cs" />
+    <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
+    <Compile Include="Assets\Scripts\Player\IStateTracker.cs" />
+    <Compile Include="Assets\Scripts\RayGroundChecker.cs" />
     <Compile Include="Assets\Scripts\BoxGroundChecker.cs" />
-    <Compile Include="Assets\Scripts\KeyboardMove.cs" />
     <Compile Include="Assets\Scripts\Ground.cs" />
-    <Compile Include="Assets\Scripts\GroundChecker.cs" />
+    <Compile Include="Assets\Scripts\Player\MoveAnimation.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Rotator.cs" />
+    <Compile Include="Assets\Scripts\Player\Move.cs" />
     <None Include="Assets\BigManJD\readme.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.47f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

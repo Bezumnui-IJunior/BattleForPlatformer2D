@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class GroundChecker : MonoBehaviour
+public class RayGroundChecker : MonoBehaviour
 {
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _raySize = 0.1f;
