@@ -47,17 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player\StateTracker.cs" />
-    <Compile Include="Assets\Scripts\Cooldown.cs" />
-    <Compile Include="Assets\Scripts\Player\KeyboardMove.cs" />
-    <Compile Include="Assets\Scripts\Player\GroundChecker.cs" />
-    <Compile Include="Assets\Scripts\Player\IStateTracker.cs" />
-    <Compile Include="Assets\Scripts\RayGroundChecker.cs" />
-    <Compile Include="Assets\Scripts\BoxGroundChecker.cs" />
+    <Compile Include="Assets\Scripts\Move\Move.cs" />
+    <Compile Include="Assets\Scripts\Move\BoxGroundChecker.cs" />
+    <Compile Include="Assets\Scripts\Move\RayGroundChecker.cs" />
     <Compile Include="Assets\Scripts\Ground.cs" />
     <Compile Include="Assets\Scripts\Player\MoveAnimation.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
-    <Compile Include="Assets\Scripts\Rotator.cs" />
-    <Compile Include="Assets\Scripts\Player\Move.cs" />
+    <Compile Include="Assets\Scripts\Entity\IStateTracker.cs" />
+    <Compile Include="Assets\Scripts\Move\Rotator.cs" />
+    <Compile Include="Assets\Scripts\Misc\Cooldown.cs" />
+    <Compile Include="Assets\Scripts\Player\KeyboardInput.cs" />
+    <Compile Include="Assets\Scripts\Move\GroundChecker.cs" />
     <None Include="Assets\BigManJD\readme.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.47f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

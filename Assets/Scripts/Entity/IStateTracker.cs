@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Player
+namespace Entity
 {
     public interface IStateTracker
     {
@@ -8,7 +8,7 @@ namespace Player
         event Action StopFalling;
         event Action StartJumping;
         event Action StopJumping;
-        event Action StartWalking;
+        event Action<float> StartWalking;
         event Action StopWalking;
     }
 }

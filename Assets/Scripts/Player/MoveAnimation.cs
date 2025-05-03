@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Entity;
+using UnityEngine;
 
 namespace Player
 {
@@ -39,7 +40,7 @@ namespace Player
             _state.StopFalling -= OnStopFalling;
         }
 
-        private void OnStartWalking() =>
+        private void OnStartWalking(float _) =>
             _animator.SetBool(IsWalkAnimation, true);
 
         private void OnStopWalking() =>

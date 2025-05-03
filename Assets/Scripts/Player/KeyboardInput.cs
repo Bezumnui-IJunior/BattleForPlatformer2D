@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Player
 {
-    [RequireComponent(typeof(Move))]
-    public class KeyboardMove : MonoBehaviour
+    [RequireComponent(typeof(Move.Move))]
+    public class KeyboardInput : MonoBehaviour
     {
-        private Move _move;
+        private Move.Move _move;
 
         private void Awake()
         {
-            _move = GetComponent<Move>();
+            _move = GetComponent<Move.Move>();
         }
 
         private void Update()

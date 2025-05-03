@@ -1,7 +1,9 @@
 ﻿using System;
+using Misc;
+using Player;
 using UnityEngine;
 
-namespace Player
+namespace Move
 {
     public class Move : MonoBehaviour
     {
@@ -9,8 +11,7 @@ namespace Player
         [SerializeField] private float _jumpForce = 10;
         [SerializeField] private float _cooldownSeconds = .2f;
 
-        private Rotator _rotator;
-        private Player _player;
+        private GroundChecker _groundChecker;
         private Rigidbody2D _rigidbody;
         private Cooldown _cooldown;
 
@@ -22,10 +23,9 @@ namespace Player
 
         private void Awake()
         {
-            _player = GetComponent<Player>();
+            _groundChecker = GetComponent<GroundChecker>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _cooldown = new Cooldown(_cooldownSeconds);
-            _rotator = new Rotator(transform);
         }
 
         public void Stay() =>
@@ -39,7 +39,7 @@ namespace Player
 
         public void Jump()
         {
-            if (_player.IsGrounded() == false)
+            if (_groundChecker.IsGrounded() == false)
                 return;
 
             if (_cooldown.IsFree == false)
@@ -56,7 +56,6 @@ namespace Player
             Vector3 velocity = _rigidbody.linearVelocity;
             velocity.x = speed;
             _rigidbody.linearVelocity = velocity;
-            _rotator.RotateByDirection(speed);
 
             InvokeMoving(speed);
         }

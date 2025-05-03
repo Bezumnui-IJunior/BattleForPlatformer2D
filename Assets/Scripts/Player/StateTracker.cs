@@ -1,9 +1,10 @@
 ﻿using System;
+using Entity;
 using UnityEngine;
 
 namespace Player
 {
-    [RequireComponent(typeof(Move))]
+    [RequireComponent(typeof(Move.Move))]
     [RequireComponent(typeof(Player))]
     public class StateTracker : MonoBehaviour, IStateTracker
     {
@@ -12,7 +13,7 @@ namespace Player
 
         private Player _player;
 
-        private Move _move;
+        private Move.Move _move;
         private bool _isLastFall;
         private bool _isJump;
         private float _jumpTime;
@@ -21,13 +22,13 @@ namespace Player
         public event Action StopFalling;
         public event Action StartJumping;
         public event Action StopJumping;
-        public event Action StartWalking;
+        public event Action<float> StartWalking;
         public event Action StopWalking;
 
         private void Awake()
         {
             _player = GetComponent<Player>();
-            _move = GetComponent<Move>();
+            _move = GetComponent<Move.Move>();
         }
 
         private void OnEnable()
@@ -96,6 +97,6 @@ namespace Player
             StopWalking?.Invoke();
 
         private void OnStartWalking() =>
-            StartWalking?.Invoke();
+            StartWalking?.Invoke(_player.Rigidbody.linearVelocityX);
     }
 }
