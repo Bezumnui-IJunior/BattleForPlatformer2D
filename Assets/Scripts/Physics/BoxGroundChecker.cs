@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Move
+namespace Physics
 {
     public class BoxGroundChecker : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace Move
     
         public bool IsGrounded()
         {
-            Collider2D hit = Physics2D.OverlapBox(transform.position, _boxSize, 0, _groundMask);
+            Collider2D hit = Physics2D.OverlapBox(transform.position, _boxSize, 0, _groundMask.value);
         
             return (bool) hit;
         }

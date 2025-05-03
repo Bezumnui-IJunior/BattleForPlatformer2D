@@ -7,5 +7,6 @@ namespace Entity.IState
         public IWalkingTracker WalkingTracker { get; }
         public IGroundedTracker GroundedTracker { get; }
 
+        public void Initialize();
     }
 }

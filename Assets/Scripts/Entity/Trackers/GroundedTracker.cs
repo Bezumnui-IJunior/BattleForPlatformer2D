@@ -1,41 +1,38 @@
 using System;
 using Entity.IState;
 using Move;
-using UnityEngine;
+using Physics;
 
-namespace Entity.State
+namespace Entity.Trackers
 {
-    [Serializable]
     public class GroundedTracker : Tracker, IGroundedTracker
     {
-        private GroundChecker _groundChecker;
-
-        private bool _isGrounded;
+        private readonly IGroundChecker _groundChecker;
 
         public event Action Grounded;
+        public bool IsGround { get; private set; }
 
         public override void Update()
         {
             if (_groundChecker.IsGrounded())
             {
-                if (_isGrounded == false)
+                if (IsGround == false)
                 {
-                    Debug.Log("Grounded");
                     Grounded?.Invoke();
                 }
 
-                _isGrounded = true;
+                IsGround = true;
 
                 return;
             }
 
-            _isGrounded = false;
+            IsGround = false;
         }
 
-        public void Init(GroundChecker groundChecker)
+        public GroundedTracker(IGroundChecker groundChecker)
         {
             _groundChecker = groundChecker;
-            _isGrounded = _groundChecker.IsGrounded();
+            IsGround = _groundChecker.IsGrounded();
         }
     }
 }

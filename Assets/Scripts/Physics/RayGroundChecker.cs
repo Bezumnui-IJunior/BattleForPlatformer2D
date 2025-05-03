@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Move
+namespace Physics
 {
     public class RayGroundChecker : MonoBehaviour
     {
@@ -15,7 +15,6 @@ namespace Move
         {
             if (_groundCheck == null)
                 throw new NullReferenceException("Ground Check must be set.");
-        
         }
 
         public bool IsGrounded()
@@ -23,8 +22,7 @@ namespace Move
             Vector3 direction = _groundCheck.position + Vector3.down;
             RaycastHit2D hit = Physics2D.Raycast(_groundCheck.position, direction, _raySize, _groundMask);
 
-            return (bool) hit;
+            return (bool)hit;
         }
-
     }
 }

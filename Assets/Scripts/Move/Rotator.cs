@@ -1,58 +1,37 @@
-﻿using Entity.IState;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Move
 {
-    public class Rotator : MonoBehaviour
+    public class Rotator : MonoBehaviour, IRotator
     {
-        private readonly Quaternion _rightRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        private readonly Quaternion _rightRotation = Quaternion.identity;
         private readonly Quaternion _leftRotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
-        private IStateTracker _state;
-
-        private bool _isLookRight;
-
-        private void Awake()
+        public void Toggle()
         {
-            _state = GetComponent<IStateTracker>();
-        }
-
-        private void OnEnable()
-        {
-            _state.WalkingTracker.StartWalking += OnStartWalking;
-        }
-
-        private void OnDisable()
-        {
-            _state.WalkingTracker.StartWalking -= OnStartWalking;
-        }
-
-        private void OnStartWalking(float speed)
-        {
-            if (speed > 0)
-                LookRight();
-            else
+            if (IsLookRight())
                 LookLeft();
+            else
+                LookRight();
         }
 
-        private void LookRight()
+        public void LookRight()
         {
-            if (_isLookRight)
+            if (IsLookRight())
                 return;
 
             transform.rotation = _rightRotation;
-
-            _isLookRight = true;
         }
 
-        private void LookLeft()
+        public void LookLeft()
         {
-            if (_isLookRight == false)
+            if (IsLookRight() == false)
                 return;
 
             transform.rotation = _leftRotation;
-
-            _isLookRight = false;
         }
+
+        private bool IsLookRight() =>
+            transform.right.x > 0;
     }
 }

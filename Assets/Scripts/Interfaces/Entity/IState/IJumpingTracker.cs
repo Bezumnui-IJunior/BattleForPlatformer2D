@@ -4,7 +4,9 @@ namespace Entity.IState
 {
     public interface IJumpingTracker
     {
-        event Action StartJumping;
-        event Action StopJumping;
+        public bool CanJump();
+        public void Jump();
+
+        public event Action JumpingStopped;
     }
 }

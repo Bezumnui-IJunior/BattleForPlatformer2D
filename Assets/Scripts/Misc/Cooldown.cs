@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Misc
@@ -7,22 +8,37 @@ namespace Misc
     {
         private readonly WaitForSeconds _delay;
 
-        public Cooldown(float delaySeconds)
+        private Coroutine _coroutine;
+        private MonoBehaviour _monoBehaviour;
+        
+        public Cooldown(MonoBehaviour monoBehaviour, float delaySeconds)
         {
             _delay = new WaitForSeconds(delaySeconds);
             IsFree = true;
+            _monoBehaviour = monoBehaviour;
         }
 
         public bool IsFree { get; private set; }
 
-        public IEnumerator Accuse()
+        public void Accuse()
+        {
+            _coroutine = _monoBehaviour.StartCoroutine(WaitingDelay());
+        }
+
+        public void Stop()
+        {
+            if (_coroutine != null)
+                _monoBehaviour.StopCoroutine(_coroutine);
+        }
+
+        private IEnumerator WaitingDelay()
         {
             IsFree = false;
 
             yield return _delay;
 
-            // 0.8299966
             IsFree = true;
         }
+
     }
 }

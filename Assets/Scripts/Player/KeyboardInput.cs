@@ -1,16 +1,14 @@
+using System;
 using UnityEngine;
 
 namespace Player
 {
-    [RequireComponent(typeof(Move.Move))]
-    public class KeyboardInput : MonoBehaviour
+    public class KeyboardInput : MonoBehaviour, IInput
     {
-        private Move.Move _move;
-
-        private void Awake()
-        {
-            _move = GetComponent<Move.Move>();
-        }
+        public event Action GoingLeft;
+        public event Action GoingRight;
+        public event Action HorizontalStopping;
+        public event Action Jumping;
 
         private void Update()
         {
@@ -20,14 +18,17 @@ namespace Player
             float horizontalSpeed = Input.GetAxisRaw(HorizontalAxis);
 
             if (horizontalSpeed > 0)
-                _move.GoRight();
+                GoingRight?.Invoke();
             else if (horizontalSpeed < 0)
-                _move.GoLeft();
-            else
-                _move.Stay();
+                GoingLeft?.Invoke();
+
+            if (Input.GetButtonUp(HorizontalAxis))
+            {
+                HorizontalStopping?.Invoke();
+            }
 
             if (Input.GetButton(JumpButton))
-                _move.Jump();
+                Jumping?.Invoke();
         }
     }
 }

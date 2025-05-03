@@ -4,7 +4,8 @@ namespace Entity.IState
 {
     public interface IWalkingTracker
     {
-        event Action<float> StartWalking;
-        event Action StopWalking;
+        event Action WalkingStoped;
+
+        public bool TryStartWalk();
     }
 }

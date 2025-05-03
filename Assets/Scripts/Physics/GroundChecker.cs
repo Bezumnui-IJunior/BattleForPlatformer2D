@@ -1,9 +1,15 @@
 ﻿using System;
+using Move;
 using UnityEngine;
 
-namespace Move
+namespace Physics
 {
-    public class GroundChecker : MonoBehaviour
+    public interface IGroundChecker
+    {
+        bool IsGrounded();
+    }
+
+    public class GroundChecker : MonoBehaviour, IGroundChecker
     {
         [SerializeField] private BoxGroundChecker _groundChecker;
         [SerializeField] private BoxGroundChecker _groundExcluder;

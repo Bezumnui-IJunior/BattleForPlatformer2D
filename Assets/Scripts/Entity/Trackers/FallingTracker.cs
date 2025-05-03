@@ -2,23 +2,23 @@ using System;
 using Entity.IState;
 using UnityEngine;
 
-namespace Entity.State
+namespace Entity.Trackers
 {
-    [Serializable]
     public class FallingTracker : Tracker, IFallingTracker
     {
-        [SerializeField] private float _fallThreshold = 0.2f;
+        private readonly float _fallThreshold;
 
-        private Rigidbody2D _rigidbody;
+        private readonly Rigidbody2D _rigidbody;
 
         private bool _isLastFall;
-
-        public event Action StartFalling;
-        public event Action StopFalling;
         
-        public void Init(Rigidbody2D rigidbody)
+        public event Action FallingStarting;
+        public event Action FallingStopped;
+        
+        public FallingTracker(Rigidbody2D rigidbody, float fallThreshold)
         {
             _rigidbody = rigidbody;
+            _fallThreshold = fallThreshold;
         }
 
         public override void Update()
@@ -26,9 +26,9 @@ namespace Entity.State
             bool isFall = IsFall();
 
             if (_isLastFall == false && isFall)
-                StartFalling?.Invoke();
+                FallingStarting?.Invoke();
             else if (_isLastFall && isFall == false)
-                StopFalling?.Invoke();
+                FallingStopped?.Invoke();
 
             _isLastFall = isFall;
         }
