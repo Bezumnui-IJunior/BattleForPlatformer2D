@@ -1,11 +1,10 @@
 ﻿using System;
 using Misc;
-using Player;
 using UnityEngine;
 
 namespace Move
 {
-    public class Move : MonoBehaviour
+    public class Move : MonoBehaviour, IMove
     {
         [SerializeField] private float _speed = 100;
         [SerializeField] private float _jumpForce = 10;

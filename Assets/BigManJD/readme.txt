@@ -5,7 +5,7 @@ included with:
 
 2 animated characters with:
 idle animation
-run animation
+run animation 
 jump animation
 fall animation
 

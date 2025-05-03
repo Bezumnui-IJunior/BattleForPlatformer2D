@@ -1183,16 +1183,14 @@ GameObject:
   - component: {fileID: 227380957}
   - component: {fileID: 227380956}
   - component: {fileID: 227380954}
-  - component: {fileID: 227380953}
-  - component: {fileID: 227380958}
   - component: {fileID: 227380959}
   - component: {fileID: 227380962}
   - component: {fileID: 227380960}
   - component: {fileID: 227380961}
-  - component: {fileID: 227380963}
-  - component: {fileID: 227380964}
   - component: {fileID: 227380965}
   - component: {fileID: 227380966}
+  - component: {fileID: 227380968}
+  - component: {fileID: 227380967}
   m_Layer: 0
   m_Name: LocalPlayer
   m_TagString: Untagged
@@ -1200,18 +1198,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &227380953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227380952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 702e1884e32a7f84eaad16eebd6754be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &227380954
 Rigidbody2D:
   serializedVersion: 5
@@ -1311,23 +1297,6 @@ Transform:
   - {fileID: 1314832541}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &227380958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227380952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68cec439083d4e56b833b4ebdda731ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _boxSize: {x: 0.8, y: 0.03}
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  _gizmosColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!61 &227380959
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1423,32 +1392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7476a430f9b471f9c74952df683562d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &227380963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227380952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc395b07b7db4c8aaf8263451c312b3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &227380964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227380952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 168afeeda12f4450b1ff3aa9adc247aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _groundCheckCooldown: 0.2
-  _fallThreshold: 0.01
 --- !u!114 &227380965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1475,6 +1418,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274658c22cdb4e30b1426042ea670d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &227380967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227380952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a28b39b015b774ce5b4e98f7dfc23a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &227380968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227380952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ecf2bd8bfd44a568a91a461dd216792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fallingTracker:
+    _fallThreshold: 0.2
 --- !u!1 &472240726
 GameObject:
   m_ObjectHideFlags: 0
@@ -6110,7 +6079,7 @@ Transform:
   m_GameObject: {fileID: 1361237733}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.993, z: 0}
+  m_LocalPosition: {x: 0, y: -1.999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6128,7 +6097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68cec439083d4e56b833b4ebdda731ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boxSize: {x: 0.8, y: 0.0005}
+  _boxSize: {x: 0.8, y: 0.0002}
   _groundMask:
     serializedVersion: 2
     m_Bits: 64

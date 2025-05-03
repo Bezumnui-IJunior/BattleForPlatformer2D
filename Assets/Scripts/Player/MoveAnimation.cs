@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using Entity.IState;
+using Entity.State;
 using UnityEngine;
 
 namespace Player
@@ -22,22 +23,22 @@ namespace Player
 
         private void OnEnable()
         {
-            _state.StartWalking += OnStartWalking;
-            _state.StopWalking += OnStopWalking;
-            _state.StartJumping += OnStartJumping;
-            _state.StopJumping += OnStopJumping;
-            _state.StartFalling += OnStartFalling;
-            _state.StopFalling += OnStopFalling;
+            _state.WalkingTracker.StartWalking += OnStartWalking;
+            _state.WalkingTracker.StopWalking += OnStopWalking;
+            _state.JumpingTracker.StartJumping += OnStartJumping;
+            _state.JumpingTracker.StopJumping += OnStopJumping;
+            _state.FallingTracker.StartFalling += OnStartFalling;
+            _state.FallingTracker.StopFalling += OnStopFalling;
         }
 
         private void OnDisable()
         {
-            _state.StartWalking -= OnStartWalking;
-            _state.StopWalking -= OnStopWalking;
-            _state.StartJumping -= OnStartJumping;
-            _state.StopJumping -= OnStopJumping;
-            _state.StartFalling -= OnStartFalling;
-            _state.StopFalling -= OnStopFalling;
+            _state.WalkingTracker.StartWalking -= OnStartWalking;
+            _state.WalkingTracker.StopWalking -= OnStopWalking;
+            _state.JumpingTracker.StartJumping -= OnStartJumping;
+            _state.JumpingTracker.StopJumping -= OnStopJumping;
+            _state.FallingTracker.StartFalling -= OnStartFalling;
+            _state.FallingTracker.StopFalling -= OnStopFalling;
         }
 
         private void OnStartWalking(float _) =>

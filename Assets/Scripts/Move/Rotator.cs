@@ -1,5 +1,4 @@
-﻿using Entity;
-using Player;
+﻿using Entity.IState;
 using UnityEngine;
 
 namespace Move
@@ -20,12 +19,12 @@ namespace Move
 
         private void OnEnable()
         {
-            _state.StartWalking += OnStartWalking;
+            _state.WalkingTracker.StartWalking += OnStartWalking;
         }
 
         private void OnDisable()
         {
-            _state.StartWalking -= OnStartWalking;
+            _state.WalkingTracker.StartWalking -= OnStartWalking;
         }
 
         private void OnStartWalking(float speed)
