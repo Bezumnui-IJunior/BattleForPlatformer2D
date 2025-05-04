@@ -5,9 +5,7 @@ namespace Player
 {
     public class KeyboardInput : MonoBehaviour, IInput
     {
-        public event Action GoingLeft;
-        public event Action GoingRight;
-        public event Action HorizontalStopping;
+        public float HorizontalSpeed { get; private set; }
         public event Action Jumping;
 
         private void Update()
@@ -15,17 +13,7 @@ namespace Player
             const string HorizontalAxis = "Horizontal";
             const string JumpButton = "Jump";
 
-            float horizontalSpeed = Input.GetAxisRaw(HorizontalAxis);
-
-            if (horizontalSpeed > 0)
-                GoingRight?.Invoke();
-            else if (horizontalSpeed < 0)
-                GoingLeft?.Invoke();
-
-            if (Input.GetButtonUp(HorizontalAxis))
-            {
-                HorizontalStopping?.Invoke();
-            }
+            HorizontalSpeed = Input.GetAxisRaw(HorizontalAxis);
 
             if (Input.GetButton(JumpButton))
                 Jumping?.Invoke();

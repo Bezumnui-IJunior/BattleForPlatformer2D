@@ -2,9 +2,6 @@
 
 public interface IInput
 {
-    public event Action GoingLeft;
-    public event Action GoingRight;
-    public event Action HorizontalStopping;
-    
+    public float HorizontalSpeed { get; }
     public event Action Jumping;
 }

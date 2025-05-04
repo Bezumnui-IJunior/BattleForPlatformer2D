@@ -25,16 +25,13 @@ namespace Move
             _rigidbody = GetComponent<Rigidbody2D>();
             _cooldown = new Cooldown(this, _cooldownSeconds);
         }
-        
-        public void GoRight() =>
-            SetSpeedByX(_speed);
 
-        public void GoLeft() =>
-            SetSpeedByX(-_speed);
-        
-        public void Stay() =>
-            SetSpeedByX(0);
-
+        public void SetSpeedByX(float speed)
+        {
+            Vector3 velocity = _rigidbody.linearVelocity;
+            velocity.x = _speed * speed;
+            _rigidbody.linearVelocity = velocity;
+        }
 
         public void Jump()
         {
@@ -45,16 +42,8 @@ namespace Move
                 return;
 
             _cooldown.Accuse();
-
+            _rigidbody.linearVelocityY = 0;
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode2D.Impulse);
         }
-
-        private void SetSpeedByX(float speed)
-        {
-            Vector3 velocity = _rigidbody.linearVelocity;
-            velocity.x = speed;
-            _rigidbody.linearVelocity = velocity;
-        }
-
     }
 }

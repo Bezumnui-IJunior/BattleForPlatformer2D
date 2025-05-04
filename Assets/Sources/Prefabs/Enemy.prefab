@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 365856014401598744}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,11 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68cec439083d4e56b833b4ebdda731ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boxSize: {x: 1, y: 1.06}
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 64
+  _size: {x: 1, y: 1}
+  _filter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   _gizmosColor: {r: 0.9811321, g: 0, b: 0, a: 1}
+  _ignoredCollider: {fileID: 2726202186866060016}
 --- !u!1 &3154909267273509310
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,6 +81,7 @@ GameObject:
   - component: {fileID: 3572644457586615610}
   - component: {fileID: 2726202186866060016}
   - component: {fileID: 8475283908718108553}
+  - component: {fileID: 3252352931719476635}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -206,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61395f4b04734f61a1a3d3723f39ca90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallCheck: {fileID: 6786739797114667610}
+  _wallChecker: {fileID: 6786739797114667610}
 --- !u!114 &8590781056227347567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,8 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20967811f7dd4581a74259d57638e634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _jumpForce: 10
+  _speed: 1
+  _jumpForce: 5
   _cooldownSeconds: 0.2
 --- !u!114 &3709875987693474879
 MonoBehaviour:
@@ -257,7 +270,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -308,11 +321,11 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.03}
+  m_Offset: {x: 0, y: 0.94}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2, y: 1.875}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -334,6 +347,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundChecker: {fileID: 5908893173671032383}
   _groundExcluder: {fileID: 4008178105139613821}
+--- !u!114 &3252352931719476635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3154909267273509310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55edba9560b44ed3ac752dc0c33b7444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3895386408889465408
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +370,7 @@ GameObject:
   - component: {fileID: 7803429460902098774}
   - component: {fileID: 6786739797114667610}
   m_Layer: 0
-  m_Name: WallCheck
+  m_Name: WallCheckRotator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,7 +385,7 @@ Transform:
   m_GameObject: {fileID: 3895386408889465408}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.396, y: 0, z: 0}
+  m_LocalPosition: {x: 0.506, y: 0.881, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -410,7 +435,7 @@ Transform:
   m_GameObject: {fileID: 4175854254614776257}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.787, z: 0}
+  m_LocalPosition: {x: 0, y: 0.063, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -428,11 +453,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68cec439083d4e56b833b4ebdda731ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boxSize: {x: 1.09, y: 0.15}
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 64
+  _size: {x: 1, y: 0.1}
+  _filter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   _gizmosColor: {r: 0.8396226, g: 0.099012084, b: 0.6153642, a: 1}
+  _ignoredCollider: {fileID: 2726202186866060016}
 --- !u!1 &8072437600342656404
 GameObject:
   m_ObjectHideFlags: 0

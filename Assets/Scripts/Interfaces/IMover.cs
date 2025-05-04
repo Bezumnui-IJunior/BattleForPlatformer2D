@@ -1,7 +1,5 @@
 ﻿public interface IMover
 {
-    void GoRight();
-    void GoLeft();
-    public void Stay();
+    public void SetSpeedByX(float speed);
     void Jump();
 }

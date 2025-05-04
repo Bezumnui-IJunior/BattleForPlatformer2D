@@ -14,14 +14,14 @@ namespace Entity.Trackers
             _rigidbody = rigidbody;
         }
 
-        public event Action WalkingStoped;
+        public event Action WalkingStopped;
 
         public override void Update()
         {
             bool isWalk = _rigidbody.linearVelocityX == 0;
 
             if (_isWalk && isWalk)
-                WalkingStoped?.Invoke();
+                WalkingStopped?.Invoke();
 
             _isWalk = isWalk;
         }

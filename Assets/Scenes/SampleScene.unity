@@ -5656,6 +5656,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2726202186866060016, guid: 60711ba731c22b047a20bcd1c3c07cac, type: 3}
+      propertyPath: m_Size.x
+      value: 1.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726202186866060016, guid: 60711ba731c22b047a20bcd1c3c07cac, type: 3}
+      propertyPath: m_Size.y
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726202186866060016, guid: 60711ba731c22b047a20bcd1c3c07cac, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.97
+      objectReference: {fileID: 0}
     - target: {fileID: 3154909267273509310, guid: 60711ba731c22b047a20bcd1c3c07cac, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -5737,6 +5749,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100810402100109508, guid: 2478ffc3747e24e44856fba91ebf44f7, type: 3}
+      propertyPath: _ignoredCollied
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 100810402100109508, guid: 2478ffc3747e24e44856fba91ebf44f7, type: 3}
+      propertyPath: _filter.useLayerMask
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100810402100109508, guid: 2478ffc3747e24e44856fba91ebf44f7, type: 3}
+      propertyPath: _filter.layerMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2044156772630906010, guid: 2478ffc3747e24e44856fba91ebf44f7, type: 3}
       propertyPath: m_Name
       value: LocalPlayer
@@ -5780,6 +5804,14 @@ PrefabInstance:
     - target: {fileID: 2532949129094360990, guid: 2478ffc3747e24e44856fba91ebf44f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184217534616318154, guid: 2478ffc3747e24e44856fba91ebf44f7, type: 3}
+      propertyPath: _filter.useDepth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184217534616318154, guid: 2478ffc3747e24e44856fba91ebf44f7, type: 3}
+      propertyPath: _filter.layerMask.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4786325235767203286, guid: 2478ffc3747e24e44856fba91ebf44f7, type: 3}

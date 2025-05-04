@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Physics
 {
-    public class WallCheck : MonoBehaviour
+    public class WallChecker : MonoBehaviour
     {
         [SerializeField] private float _raySize = 1;
         [SerializeField] private LayerMask _mask;
