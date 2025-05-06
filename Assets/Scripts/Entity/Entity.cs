@@ -1,7 +1,4 @@
-﻿using System;
-using Entity.IState;
-using Move;
-using Player;
+﻿using Entity.IState;
 using UnityEngine;
 
 namespace Entity

@@ -1,9 +1,6 @@
-﻿namespace Move
+﻿public interface IRotator
 {
-    public interface IRotator
-    {
-        void LookRight();
-        void LookLeft();
-        public void Toggle();
-    }
+    void LookRight();
+    void LookLeft();
+    public void Toggle();
 }

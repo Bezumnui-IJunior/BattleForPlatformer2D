@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Misc
@@ -9,7 +8,7 @@ namespace Misc
         private readonly WaitForSeconds _delay;
 
         private Coroutine _coroutine;
-        private MonoBehaviour _monoBehaviour;
+        private readonly MonoBehaviour _monoBehaviour;
         
         public Cooldown(MonoBehaviour monoBehaviour, float delaySeconds)
         {

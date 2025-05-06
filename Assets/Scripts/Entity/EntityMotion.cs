@@ -1,5 +1,4 @@
 ﻿using Entity.IState;
-using Move;
 
 namespace Entity
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using Move;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Enemy
 {
