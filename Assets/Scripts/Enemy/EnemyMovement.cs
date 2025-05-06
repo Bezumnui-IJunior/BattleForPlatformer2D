@@ -12,9 +12,9 @@ namespace Enemy
         [SerializeField] private WallChecker _wallChecker;
 
         private Enemy _entity;
+        public event Action Jumping;
 
         public float HorizontalSpeed { get; private set; }
-        public event Action Jumping;
 
         private void Awake()
         {

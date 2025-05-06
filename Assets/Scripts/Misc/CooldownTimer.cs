@@ -3,15 +3,16 @@ using UnityEngine;
 
 namespace Misc
 {
-    public class Cooldown
+    public class CooldownTimer
     {
         private readonly WaitForSeconds _delay;
 
         private Coroutine _coroutine;
         private readonly MonoBehaviour _monoBehaviour;
         
-        public Cooldown(MonoBehaviour monoBehaviour, float delaySeconds)
+        public CooldownTimer(MonoBehaviour monoBehaviour, float delaySeconds)
         {
+            // TODO: replace MonoBehaviour by interface
             _delay = new WaitForSeconds(delaySeconds);
             IsFree = true;
             _monoBehaviour = monoBehaviour;

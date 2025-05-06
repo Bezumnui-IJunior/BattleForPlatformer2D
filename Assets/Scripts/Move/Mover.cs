@@ -12,7 +12,7 @@ namespace Move
 
         private GroundChecker _groundChecker;
         private Rigidbody2D _rigidbody;
-        private Cooldown _cooldown;
+        private CooldownTimer _cooldownTimer;
 
         private bool _isMove;
 
@@ -20,25 +20,21 @@ namespace Move
         {
             _groundChecker = GetComponent<GroundChecker>();
             _rigidbody = GetComponent<Rigidbody2D>();
-            _cooldown = new Cooldown(this, _cooldownSeconds);
+            _cooldownTimer = new CooldownTimer(this, _cooldownSeconds);
         }
 
-        public void SetSpeedByX(float speed)
-        {
-            Vector3 velocity = _rigidbody.linearVelocity;
-            velocity.x = _speed * speed;
-            _rigidbody.linearVelocity = velocity;
-        }
+        public void SetSpeedByX(float speed) =>
+            _rigidbody.linearVelocityX = speed * _speed;
 
         public void Jump()
         {
             if (_groundChecker.IsGrounded() == false)
                 return;
 
-            if (_cooldown.IsFree == false)
+            if (_cooldownTimer.IsFree == false)
                 return;
 
-            _cooldown.Accuse();
+            _cooldownTimer.Accuse();
             _rigidbody.linearVelocityY = 0;
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode2D.Impulse);
         }

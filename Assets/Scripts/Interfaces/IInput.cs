@@ -2,6 +2,7 @@
 
 public interface IInput
 {
-    public float HorizontalSpeed { get; }
     public event Action Jumping;
+
+    public float HorizontalSpeed { get; }
 }

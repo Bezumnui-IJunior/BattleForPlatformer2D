@@ -59,6 +59,7 @@
     <Compile Include="Assets/Scripts/Enemy/Enemy.cs" />
     <Compile Include="Assets/Scripts/Interfaces/IInput.cs" />
     <Compile Include="Assets/Scripts/Move/Mover.cs" />
+    <Compile Include="Assets/Scripts/Misc/CooldownTimer.cs" />
     <Compile Include="Assets/Scripts/Player/Collectables/CoinCollector.cs" />
     <Compile Include="Assets/Scripts/Props/Coin.cs" />
     <Compile Include="Assets/Scripts/Interfaces/Props/ICollectable.cs" />
@@ -75,7 +76,6 @@
     <Compile Include="Assets/Scripts/Move/Rotator.cs" />
     <Compile Include="Assets/Scripts/Physics/RayGroundChecker.cs" />
     <Compile Include="Assets/Scripts/Physics/BoxGroundChecker.cs" />
-    <Compile Include="Assets/Scripts/Misc/Cooldown.cs" />
     <Compile Include="Assets/Scripts/Interfaces/Props/ICollector.cs" />
     <Compile Include="Assets/Scripts/Entity/Trackers/StateTracker.cs" />
     <Compile Include="Assets/Scripts/Player/KeyboardInput.cs" />

@@ -5,8 +5,9 @@ namespace Player
 {
     public class KeyboardInput : MonoBehaviour, IInput
     {
-        public float HorizontalSpeed { get; private set; }
         public event Action Jumping;
+
+        public float HorizontalSpeed { get; private set; }
 
         private void Update()
         {

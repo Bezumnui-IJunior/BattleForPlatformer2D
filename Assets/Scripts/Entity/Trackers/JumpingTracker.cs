@@ -8,7 +8,7 @@ namespace Entity.Trackers
     public class JumpingTracker : Tracker, IJumpingTracker
     {
         private readonly IStateTracker _stateTracker;
-        private readonly Cooldown _jumpCooldown;
+        private readonly CooldownTimer _jumpCooldownTimer;
 
         private bool _isJump;
         public event Action JumpingStopped;
@@ -16,7 +16,7 @@ namespace Entity.Trackers
         public JumpingTracker(StateTracker stateTracker, float jumpCooldown)
         {
             _stateTracker = stateTracker;
-            _jumpCooldown = new Cooldown(stateTracker, jumpCooldown);
+            _jumpCooldownTimer = new CooldownTimer(stateTracker, jumpCooldown);
         }
 
         public bool CanJump()
@@ -28,8 +28,8 @@ namespace Entity.Trackers
         {
             _isJump = true;
 
-            _jumpCooldown.Stop();
-            _jumpCooldown.Accuse();
+            _jumpCooldownTimer.Stop();
+            _jumpCooldownTimer.Accuse();
         }
 
         public override void Update()
@@ -37,7 +37,7 @@ namespace Entity.Trackers
             if (_isJump == false)
                 return;
 
-            if (_jumpCooldown.IsFree == false)
+            if (_jumpCooldownTimer.IsFree == false)
                 return;
 
             if (_stateTracker.GroundedTracker.IsGround == false)
