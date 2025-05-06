@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Move
 {
-    public class Mover : MonoBehaviour, IMover
+    public class Mover : MonoBehaviour, IMover, ITimerUser
     {
         [SerializeField] private float _speed = 100;
         [SerializeField] private float _jumpForce = 10;

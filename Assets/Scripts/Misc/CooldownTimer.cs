@@ -8,27 +8,26 @@ namespace Misc
         private readonly WaitForSeconds _delay;
 
         private Coroutine _coroutine;
-        private readonly MonoBehaviour _monoBehaviour;
+        private readonly ITimerUser _user;
         
-        public CooldownTimer(MonoBehaviour monoBehaviour, float delaySeconds)
+        public CooldownTimer(ITimerUser user, float delaySeconds)
         {
-            // TODO: replace MonoBehaviour by interface
             _delay = new WaitForSeconds(delaySeconds);
             IsFree = true;
-            _monoBehaviour = monoBehaviour;
+            _user = user;
         }
 
         public bool IsFree { get; private set; }
 
         public void Accuse()
         {
-            _coroutine = _monoBehaviour.StartCoroutine(WaitingDelay());
+            _coroutine = _user.StartCoroutine(WaitingDelay());
         }
 
         public void Stop()
         {
             if (_coroutine != null)
-                _monoBehaviour.StopCoroutine(_coroutine);
+                _user.StopCoroutine(_coroutine);
         }
 
         private IEnumerator WaitingDelay()
