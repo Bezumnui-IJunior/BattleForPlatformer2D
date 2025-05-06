@@ -1,8 +1,9 @@
 ﻿using Misc;
 using Physics;
+using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Move
+namespace _move
 {
     public class Mover : MonoBehaviour, IMover, ITimerUser
     {
@@ -23,8 +24,11 @@ namespace Move
             _cooldownTimer = new CooldownTimer(this, _cooldownSeconds);
         }
 
-        public void SetSpeedByX(float speed) =>
-            _rigidbody.linearVelocityX = speed * _speed;
+        public void SetSpeedByX(float speed)
+        {
+            if (enabled)
+                _rigidbody.linearVelocityX = speed * _speed;
+        }
 
         public void Jump()
         {
@@ -37,6 +41,16 @@ namespace Move
             _cooldownTimer.Accuse();
             _rigidbody.linearVelocityY = 0;
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode2D.Impulse);
+        }
+
+        public void Enable()
+        {
+            enabled = true;
+        }
+
+        public void Disable()
+        {
+            enabled = false;
         }
     }
 }

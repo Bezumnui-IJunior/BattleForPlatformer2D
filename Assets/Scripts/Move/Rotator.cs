@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Move
+namespace _move
 {
     public class Rotator : MonoBehaviour, IRotator
     {

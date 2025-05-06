@@ -1,7 +1,6 @@
+using System;
 using System.Collections.Generic;
-using Entity.IState;
 using Entity.StaticDatas;
-using Move;
 using Physics;
 using UnityEngine;
 
@@ -17,6 +16,7 @@ namespace Entity.Trackers
         private JumpingTracker _jumpingTracker;
         private WalkingTracker _walkingTracker;
         private GroundedTracker _groundedTracker;
+        private ColliderTracker _colliderTracker;
 
         private List<Tracker> _trackers;
 
@@ -24,6 +24,7 @@ namespace Entity.Trackers
         public IJumpingTracker JumpingTracker => _jumpingTracker;
         public IWalkingTracker WalkingTracker => _walkingTracker;
         public IGroundedTracker GroundedTracker => _groundedTracker;
+        public IColliderTracker ColliderTracker => _colliderTracker;
 
         public void Initialize()
         {
@@ -34,13 +35,14 @@ namespace Entity.Trackers
             _jumpingTracker = new JumpingTracker(this, _trackerData.JumpCooldown);
             _walkingTracker = new WalkingTracker(rigidbodyComponent);
             _groundedTracker = new GroundedTracker(groundChecker);
+            _colliderTracker = new ColliderTracker();
 
             Tracker[] trackers =
             {
                 _fallingTracker,
                 _jumpingTracker,
                 _walkingTracker,
-                _groundedTracker
+                _groundedTracker,
             };
 
             _trackers = new List<Tracker>(trackers);
@@ -51,5 +53,11 @@ namespace Entity.Trackers
             foreach (Tracker tracker in _trackers)
                 tracker.Update();
         }
+
+        private void OnTriggerEnter2D(Collider2D other) =>
+            _colliderTracker.TriggerEnter2D(other);
+
+        private void OnTriggerExit2D(Collider2D other) =>
+            _colliderTracker.TriggerExit2D(other);
     }
 }

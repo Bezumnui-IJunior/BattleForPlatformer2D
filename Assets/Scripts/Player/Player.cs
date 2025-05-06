@@ -1,7 +1,4 @@
-﻿using System;
-using Entity;
-using Entity.IState;
-using Move;
+﻿using Entity;
 using UnityEngine;
 
 namespace Player
@@ -13,7 +10,6 @@ namespace Player
         private Entity.Entity _entity;
         private IInput _input;
 
-        private IMover Move => _entity.Move;
         private EntityMotion Motion => _entity.Motion;
 
         private void Awake()

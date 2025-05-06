@@ -1,4 +1,4 @@
-namespace Entity.IState
+namespace Entity.Trackers
 {
     public interface IStateTracker
     {

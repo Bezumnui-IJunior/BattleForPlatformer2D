@@ -1,7 +1,5 @@
 using System;
-using Entity.IState;
 using Misc;
-using UnityEngine;
 
 namespace Entity.Trackers
 {
