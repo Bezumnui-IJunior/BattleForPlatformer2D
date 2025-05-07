@@ -1,7 +1,10 @@
-﻿namespace Entity
+﻿using UnityEngine;
+
+namespace Entity
 {
     public interface IDamageable
     {
-        public void Damage(IAttacker attacker);
+        public Transform Transform { get; }
+        public void Damage(IAttacker attacker, float damage);
     }
 }

@@ -2,10 +2,10 @@
 using Physics;
 using UnityEngine;
 
-namespace Enemy
+namespace Enemy.States.Following
 {
     [RequireComponent(typeof(Entity.Entity))]
-    public class EnemyMovement : MonoBehaviour, IInput
+    public class FollowingMovement : MonoBehaviour, IInput
     {
         private const float RightSpeed = 1;
 

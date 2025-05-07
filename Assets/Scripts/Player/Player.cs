@@ -9,6 +9,7 @@ namespace Player
     {
         private Entity.Entity _entity;
         private IInput _input;
+        private EntityAttack _attack;
 
         private EntityMotion Motion => _entity.Motion;
 

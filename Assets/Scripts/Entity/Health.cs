@@ -10,8 +10,9 @@ namespace Entity
 
         private IDieProvider _dieProvider;
         private float _value;
-
         public event Action<IAttacker> Damaged;
+
+        public Transform Transform => transform;
 
         private void Awake()
         {
@@ -19,12 +20,12 @@ namespace Entity
             _value = _initialValue;
         }
 
-        public void Damage(IAttacker attacker)
+        public void Damage(IAttacker attacker, float damage)
         {
-            if (attacker.Damage < 0)
+            if (damage < 0)
                 return;
 
-            _value = Mathf.Max(_value - attacker.Damage, 0);
+            _value = Mathf.Max(_value - damage, 0);
 
             Damaged?.Invoke(attacker);
 

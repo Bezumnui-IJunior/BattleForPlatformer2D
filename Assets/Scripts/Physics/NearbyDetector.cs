@@ -12,7 +12,7 @@ namespace Physics
 
         private readonly Collider2D[] _colliders = new Collider2D[10];
 
-        private int GetNearbyColliders(out Collider2D[] colliders)
+        public int GetNearbyColliders(out Collider2D[] colliders)
         {
             colliders = _colliders;
 

@@ -9,7 +9,7 @@ namespace Misc
 
         private Coroutine _coroutine;
         private readonly ITimerUser _user;
-        
+
         public CooldownTimer(ITimerUser user, float delaySeconds)
         {
             _delay = new WaitForSeconds(delaySeconds);
@@ -19,7 +19,7 @@ namespace Misc
 
         public bool IsFree { get; private set; }
 
-        public void Accuse()
+        public void Occupy()
         {
             _coroutine = _user.StartCoroutine(WaitingDelay());
         }
@@ -38,6 +38,5 @@ namespace Misc
 
             IsFree = true;
         }
-
     }
 }

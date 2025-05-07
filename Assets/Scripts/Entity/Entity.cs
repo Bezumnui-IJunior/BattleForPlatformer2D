@@ -1,4 +1,5 @@
 ﻿using System;
+using Entity.Animators;
 using Entity.Trackers;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ namespace Entity
 {
     [RequireComponent(typeof(IMover))]
     [RequireComponent(typeof(IRotator))]
-    [RequireComponent(typeof(IEntityAnimator))]
     [RequireComponent(typeof(IStateTracker))]
     public class Entity : MonoBehaviour, IDieProvider
     {
@@ -15,7 +15,7 @@ namespace Entity
 
         private void Awake()
         {
-            IEntityAnimator animator = GetComponent<IEntityAnimator>();
+            IMotionAnimator motionAnimator = new MotionAnimator(GetComponent<Animator>());
             IStateTracker tracker = GetComponent<IStateTracker>();
             IMover mover = GetComponent<IMover>();
 
@@ -23,7 +23,7 @@ namespace Entity
 
             tracker.Initialize();
 
-            Motion = new EntityMotion(mover, Rotator, animator, tracker);
+            Motion = new EntityMotion(mover, Rotator, motionAnimator, tracker);
         }
 
         private void OnEnable() =>

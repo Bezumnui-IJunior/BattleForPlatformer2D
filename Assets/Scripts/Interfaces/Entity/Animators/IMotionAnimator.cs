@@ -1,6 +1,6 @@
-﻿namespace Entity
+﻿namespace Entity.Animators
 {
-    public interface IEntityAnimator
+    public interface IMotionAnimator
     {
         public void StartWalking();
         public void StopWalking();

@@ -27,7 +27,7 @@ namespace Entity.Trackers
             _isJump = true;
 
             _jumpCooldownTimer.Stop();
-            _jumpCooldownTimer.Accuse();
+            _jumpCooldownTimer.Occupy();
         }
 
         public override void Update()

@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 
-namespace Entity
+namespace Entity.Animators
 {
-    [RequireComponent(typeof(Animator))]
-    public class EntityAnimator : MonoBehaviour, IEntityAnimator
+    public class MotionAnimator : IMotionAnimator
     {
         private static readonly int IsWalkAnimation = Animator.StringToHash("IsWalk");
         private static readonly int IsJumpAnimation = Animator.StringToHash("IsJump");
         private static readonly int IsFallAnimation = Animator.StringToHash("IsFall");
 
-        private Animator _animator;
+        private readonly Animator _animator;
 
-        private void Awake()
+        public MotionAnimator(Animator animator)
         {
-            _animator = GetComponent<Animator>();
+            _animator = animator;
         }
 
         public void StartWalking() =>

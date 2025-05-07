@@ -38,7 +38,7 @@ namespace _move
             if (_cooldownTimer.IsFree == false)
                 return;
 
-            _cooldownTimer.Accuse();
+            _cooldownTimer.Occupy();
             _rigidbody.linearVelocityY = 0;
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode2D.Impulse);
         }
