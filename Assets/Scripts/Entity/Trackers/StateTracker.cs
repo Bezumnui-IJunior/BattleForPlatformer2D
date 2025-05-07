@@ -8,7 +8,7 @@ namespace Entity.Trackers
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(IGroundChecker))]
-    public class StateTracker : MonoBehaviour, IStateTracker, ITimerUser
+    public class StateTracker : MonoBehaviour, IStateTracker, ICoroutineExecutor
     {
         [SerializeField] private TrackerData _trackerData;
 

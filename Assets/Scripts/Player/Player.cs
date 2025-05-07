@@ -5,7 +5,7 @@ namespace Player
 {
     [RequireComponent(typeof(Entity.Entity))]
     [RequireComponent(typeof(IInput))]
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IDieProvider
     {
         private Entity.Entity _entity;
         private IInput _input;
@@ -32,6 +32,15 @@ namespace Player
         private void OnDisable()
         {
             _input.Jumping -= Motion.OnJumping;
+        }
+
+        private void Destroy() =>
+            Destroy(gameObject);
+
+        public void Die()
+        {
+            Debug.Log("Player is dead");
+            Destroy();
         }
     }
 }

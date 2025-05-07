@@ -18,6 +18,9 @@ namespace Entity
             _tracker = tracker;
         }
 
+        public void Jump() =>
+            OnJumping();
+
         public void OnJumping()
         {
             if (_tracker.JumpingTracker.CanJump() == false)
@@ -31,7 +34,7 @@ namespace Entity
         public void GoWithSpeed(float speed)
         {
             _mover.SetSpeedByX(speed);
-            
+
             if (speed > 0)
                 GoRight();
             else if (speed < 0)
@@ -45,7 +48,7 @@ namespace Entity
             _tracker.FallingTracker.FallingStarting += OnStartingFall;
             _tracker.FallingTracker.FallingStopped += OnStoppingFall;
         }
-        
+
         public void OnDisable()
         {
             _tracker.WalkingTracker.WalkingStopped -= OnStoppingWalking;

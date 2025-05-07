@@ -1,50 +1,50 @@
+using System;
+using System.Collections.Generic;
 using Enemy.States.Following;
+using Enemy.States.Patrolling;
 using Entity.States;
 using UnityEngine;
 
 namespace Enemy.States
 {
-    [RequireComponent(typeof(Enemy))]
     public class StateMachine : MonoBehaviour, IStateDescriptor
     {
-        private IState _currentState;
+        private State _currentState;
+        private State _patrolling;
+        private State _followingTarget;
 
-        private IState _patrolling;
-        private IState _followingTarget;
-        private Enemy _enemy;
+        private Dictionary<Type, State> _states;
 
         private void Awake()
         {
-            _enemy = GetComponent<Enemy>();
-            
-            _patrolling = new Patrolling.Patrolling();
-            _followingTarget = new Following.Following();
-            _currentState = _patrolling;
+            _patrolling = GetComponent<PatrollingState>();
+            _followingTarget = GetComponent<FollowingState>();
+
+            _states = new Dictionary<Type, State>
+            {
+                [typeof(PatrollingState)] = _patrolling,
+                [typeof(FollowingState)] = _followingTarget
+            };
         }
 
         private void OnEnable()
         {
-            _patrolling.OnExited += OnPatrollingExited;
-            _followingTarget.OnExited += OnFollowingTargetExited;
+            SetDefaultState();
         }
 
-        private void Update()
+        public void ChangeState<T>() where T : State
         {
-            _currentState.Update();
+            if (_currentState)
+                _currentState.Exit();
+
+            if (_states.TryGetValue(typeof(T), out State state) == false)
+                throw new KeyNotFoundException($"Please update {nameof(StateMachine)} with {nameof(T)}.");
+
+            _currentState = state;
+            state.Occupy();
         }
 
-        private void OnDisable()
-        {
-            _patrolling.OnExited -= OnPatrollingExited;
-            _followingTarget.OnExited -= OnFollowingTargetExited;
-        }
-
-        private void OnPatrollingExited()
-        {
-        }
-
-        private void OnFollowingTargetExited()
-        {
-        }
+        private void SetDefaultState() =>
+            ChangeState<PatrollingState>();
     }
 }

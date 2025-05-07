@@ -1,40 +1,31 @@
-﻿using System;
+﻿using Entity;
 using Physics;
 using UnityEngine;
 
 namespace Enemy.States.Patrolling
 {
-    [RequireComponent(typeof(Entity.Entity))]
-    public class PatrollingMovement : MonoBehaviour, IInput
+    public class PatrollingMovement : MonoBehaviour, IMovement
     {
         private const float RightSpeed = 1;
 
+        [SerializeField] private Enemy _enemy;
         [SerializeField] private WallChecker _wallChecker;
-
-        private Enemy _entity;
-        public event Action Jumping;
-
-        public float HorizontalSpeed { get; private set; }
-
-        private void Awake()
-        {
-            _entity = GetComponent<Enemy>();
-        }
-
-        private void Start()
-        {
-            HorizontalSpeed = RightSpeed;
-        }
 
         private void Update()
         {
             if (_wallChecker.IsWall())
             {
-                _entity.Rotator.Toggle();
-                Jumping?.Invoke();
+                _enemy.Rotator.Toggle();
+                _enemy.Motion.Jump();
             }
 
-            HorizontalSpeed = transform.right.x;
+            _enemy.Motion.GoWithSpeed(transform.right.x);
         }
+
+        public void Enable() =>
+            enabled = true;
+
+        public void Disable() =>
+            enabled = false;
     }
 }

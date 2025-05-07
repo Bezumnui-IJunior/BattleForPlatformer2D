@@ -34,10 +34,6 @@ namespace Entity
 
             Debug.Log($"hp: {_value}");
         }
-
-        public void Damage(float damage)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

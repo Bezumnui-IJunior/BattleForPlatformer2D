@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _move
 {
-    public class Mover : MonoBehaviour, IMover, ITimerUser
+    public class Mover : MonoBehaviour, IMover, ICoroutineExecutor
     {
         [SerializeField] private float _speed = 100;
         [SerializeField] private float _jumpForce = 10;
@@ -38,7 +38,7 @@ namespace _move
             if (_cooldownTimer.IsFree == false)
                 return;
 
-            _cooldownTimer.Occupy();
+            _cooldownTimer.Start();
             _rigidbody.linearVelocityY = 0;
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode2D.Impulse);
         }

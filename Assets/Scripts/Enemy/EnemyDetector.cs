@@ -1,53 +1,65 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Entity;
 using Physics;
 using UnityEngine;
 
 namespace Enemy
 {
-    [RequireComponent(typeof(NearbyDetector))]
-    public class EnemyDetector : MonoBehaviour
+    [Serializable]
+    public class EnemyDetector
     {
-        [SerializeField] private float _repeatSeconds = 0.2f;
-        [SerializeField] private Collider2D _ignoreCollider;
-
+        private bool _enabled;
         private WaitForSeconds _repeatDelay;
         private IDamageable _enemy;
         private NearbyDetector _nearbyDetector;
         private Coroutine _coroutine;
+        private ICoroutineExecutor _executor;
+        private List<IDamageable> _damageables = new(10);
+
+        public EnemyDetector(ICoroutineExecutor executor, NearbyDetector nearbyDetector, float delaySeconds)
+        {
+            _executor = executor;
+            _nearbyDetector = nearbyDetector;
+            _repeatDelay = new WaitForSeconds(delaySeconds);
+        }
 
         public event Action<IDamageable> EnemyDetected;
 
-        private void Awake()
+        public void Restart()
         {
-            _repeatDelay = new WaitForSeconds(_repeatSeconds);
-            _nearbyDetector = GetComponent<NearbyDetector>();
+            Disable();
+            Enable();
+        }
+        
+        public void Enable()
+        {
+            if (_enabled)
+                return;
+
+            _enabled = true;
+            _coroutine = _executor.StartCoroutine(Detecting());
         }
 
-        private void OnEnable()
+        public void Disable()
         {
-            _coroutine = StartCoroutine(InvokingDetector());
+            if (_enabled == false)
+                return;
+
+            _enabled = false;
+            _executor.StopCoroutine(_coroutine);
         }
 
-        private void OnDisable()
+        private IEnumerator Detecting()
         {
-            StopCoroutine(_coroutine);
-        }
-
-        private IEnumerator InvokingDetector()
-        {
-            while (enabled)
+            while (_enabled)
             {
-                _nearbyDetector.GetNearbyColliders(out Collider2D[] colliders);
+                _nearbyDetector.GetNearbyColliders(ref _damageables);
 
-                foreach (Collider2D detected in colliders)
+                foreach (IDamageable damageable in _damageables)
                 {
-                    if (detected == _ignoreCollider)
-                        continue;
-
-                    if (detected.TryGetComponent(out IDamageable enemy))
-                        EnemyDetected?.Invoke(enemy);
+                    EnemyDetected?.Invoke(damageable);
                 }
 
                 yield return _repeatDelay;

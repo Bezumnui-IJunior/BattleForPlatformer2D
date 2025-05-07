@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public interface ITimerUser
+public interface ICoroutineExecutor
 {
     public Coroutine StartCoroutine(IEnumerator enumerator);
     public void StopCoroutine(Coroutine coroutine);
