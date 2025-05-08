@@ -20,9 +20,8 @@ namespace Physics
         public bool IsGrounded()
         {
             Vector3 direction = _groundCheck.position + Vector3.down;
-            RaycastHit2D hit = Physics2D.Raycast(_groundCheck.position, direction, _raySize, _groundMask);
 
-            return (bool)hit;
+            return Physics2D.Raycast(_groundCheck.position, direction, _raySize, _groundMask);
         }
     }
 }

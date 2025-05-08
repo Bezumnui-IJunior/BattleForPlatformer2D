@@ -13,10 +13,7 @@ namespace Entity.Animators
             _animator = animator;
         }
 
-        public void Attack()
-        {
-            // TODO: implement attack animation
-            // _animator.SetTrigger(_attackAnimation);
-        }
+        public void Attack() =>
+            _animator.SetTrigger(_attackAnimation);
     }
 }

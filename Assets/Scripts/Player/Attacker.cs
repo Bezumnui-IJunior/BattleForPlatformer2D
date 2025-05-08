@@ -1,28 +1,27 @@
 ﻿using Entity;
-using Physics;
 using UnityEngine;
 
 namespace Player
 {
-    public class Attacker : IAttacker
+    public class Attacker : MonoBehaviour, IAttacker
     {
-        private readonly BoxColliderDetector _detector;
-        private readonly float _damage = 5;
+        private const float Damage = 5;
 
-        public Transform Transform { get; }
+        private Player _player;
 
-        public Attacker(BoxColliderDetector detector, Transform transform)
+        public Transform Transform => _player.transform;
+
+        private void Awake()
         {
-            _detector = detector;
-            Transform = transform;
+            _player = GetComponent<Player>();
         }
 
         public void Attack()
         {
-            if (_detector.TryGetCollided(out IDamageable damageable) == false)
+            if (_player.EnemyDetector.TryGetCollided(out IDamageable damageable) == false)
                 return;
 
-            damageable.Damage(this, _damage);
+            damageable.Damage(this, Damage);
         }
     }
 }

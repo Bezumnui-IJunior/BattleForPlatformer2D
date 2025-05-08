@@ -4,18 +4,14 @@ using UnityEngine;
 
 namespace Player
 {
-    [RequireComponent(typeof(EntityAttack))]
+    [RequireComponent(typeof(EntityBattle))]
     public class KeyboardInput : MonoBehaviour, IInput
     {
-        private IEntityAttack _attacker;
         public event Action Jumping;
+        public event Action Attacking;
 
         public float HorizontalSpeed { get; private set; }
-
-        private void Awake()
-        {
-            _attacker = GetComponent<EntityAttack>();
-        }
+        
 
         private void Update()
         {
@@ -24,11 +20,12 @@ namespace Player
             const int AttackButton = 0;
 
             HorizontalSpeed = Input.GetAxisRaw(HorizontalAxis);
+
             if (Input.GetButton(JumpButton))
                 Jumping?.Invoke();
 
             if (Input.GetMouseButtonDown(AttackButton))
-                _attacker.Attack();
+                Attacking?.Invoke();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Entity.States
 {
     public abstract class State : MonoBehaviour
     {
-        protected StateMachine StateMachine { get; private set; }
+        protected IStateMachine StateMachine { get; private set; }
 
         protected virtual void Awake()
         {

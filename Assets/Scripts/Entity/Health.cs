@@ -14,6 +14,9 @@ namespace Entity
 
         public Transform Transform => transform;
 
+        public bool IsAlive => _value > 0;
+
+
         private void Awake()
         {
             _dieProvider = GetComponent<IDieProvider>();
@@ -32,8 +35,8 @@ namespace Entity
             if (_value <= 0)
                 _dieProvider.Die();
 
-            Debug.Log($"hp: {_value}");
+            Debug.Log($"{name}'s hp: {_value}");
         }
-        
+
     }
 }

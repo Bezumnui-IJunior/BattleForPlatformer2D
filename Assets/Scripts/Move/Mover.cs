@@ -1,9 +1,8 @@
 ﻿using Misc;
 using Physics;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace _move
+namespace Move
 {
     public class Mover : MonoBehaviour, IMover, ICoroutineExecutor
     {

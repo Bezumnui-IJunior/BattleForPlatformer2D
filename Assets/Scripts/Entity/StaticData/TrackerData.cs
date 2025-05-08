@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Entity.StaticDatas
+namespace Entity.StaticData
 {
     [CreateAssetMenu(fileName = "TrackerData", menuName = "ScriptableObject/TrackerData")]
     public class TrackerData : ScriptableObject

@@ -1,19 +1,17 @@
 ﻿using Entity;
+using Misc;
 using Physics;
 using UnityEngine;
 
 namespace Enemy.States.Patrolling
 {
-    public class PatrollingMovement : MonoBehaviour, IMovement
+    public class PatrollingMovement : MonoBehaviour, IToggle
     {
-        private const float RightSpeed = 1;
-
         [SerializeField] private Enemy _enemy;
-        [SerializeField] private WallChecker _wallChecker;
 
         private void Update()
         {
-            if (_wallChecker.IsWall())
+            if (_enemy.WallChecker.IsWall())
             {
                 _enemy.Rotator.Toggle();
                 _enemy.Motion.Jump();

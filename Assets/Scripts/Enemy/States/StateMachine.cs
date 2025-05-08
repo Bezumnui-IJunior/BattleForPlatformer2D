@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Enemy.States
 {
-    public class StateMachine : MonoBehaviour, IStateDescriptor
+    public class StateMachine : MonoBehaviour, IStateMachine
     {
         private State _currentState;
         private State _patrolling;

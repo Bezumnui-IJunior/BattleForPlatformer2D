@@ -1,6 +1,6 @@
 namespace Entity.States
 {
-    public interface IStateDescriptor
+    public interface IStateMachine
     {
         public void ChangeState<T>() where T : State;
     }

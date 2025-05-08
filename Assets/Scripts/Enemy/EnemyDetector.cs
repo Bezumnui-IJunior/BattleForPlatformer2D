@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entity;
+using Misc;
 using Physics;
 using UnityEngine;
 
 namespace Enemy
 {
     [Serializable]
-    public class EnemyDetector
+    public class EnemyDetector : IToggle
     {
         private bool _enabled;
         private WaitForSeconds _repeatDelay;
@@ -16,7 +17,7 @@ namespace Enemy
         private NearbyDetector _nearbyDetector;
         private Coroutine _coroutine;
         private ICoroutineExecutor _executor;
-        private List<IDamageable> _damageables = new(10);
+        private List<IDamageable> _damaged = new(10);
 
         public EnemyDetector(ICoroutineExecutor executor, NearbyDetector nearbyDetector, float delaySeconds)
         {
@@ -32,7 +33,7 @@ namespace Enemy
             Disable();
             Enable();
         }
-        
+
         public void Enable()
         {
             if (_enabled)
@@ -55,9 +56,9 @@ namespace Enemy
         {
             while (_enabled)
             {
-                _nearbyDetector.GetNearbyColliders(ref _damageables);
+                _nearbyDetector.GetNearbyColliders(ref _damaged);
 
-                foreach (IDamageable damageable in _damageables)
+                foreach (IDamageable damageable in _damaged)
                 {
                     EnemyDetected?.Invoke(damageable);
                 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Entity.Animators;
+﻿using Entity.Animators;
 using Entity.Trackers;
 using UnityEngine;
 

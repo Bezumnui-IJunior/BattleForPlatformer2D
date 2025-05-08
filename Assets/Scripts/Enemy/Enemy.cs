@@ -1,5 +1,5 @@
 ﻿using System;
-using Enemy.States;
+using Enemy.Trackers;
 using Entity;
 using Physics;
 using UnityEngine;
@@ -7,38 +7,35 @@ using UnityEngine;
 namespace Enemy
 {
     [RequireComponent(typeof(Entity.Entity))]
-    [RequireComponent(typeof(Entity.Entity))]
+    [RequireComponent(typeof(EntityBattle))]
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private StateMachine _stateMachine;
+        [SerializeField] private EnemyTracker _enemyTracker;
         [SerializeField] private NearbyDetector _nearbyDetector;
+        [SerializeField] private AttackField _attackField;
+        [SerializeField] private WallChecker _wallChecker;
 
         private Entity.Entity _entity;
         public IRotator Rotator => _entity.Rotator;
         public NearbyDetector NearbyDetector => _nearbyDetector;
         public EntityMotion Motion => _entity.Motion;
-        public IDamageable Target { private get; set; }
+        public IAttackField AttackField => _attackField;
+        public IEnemyTracker EnemyTracker => _enemyTracker;
+        public IWallChecker WallChecker => _wallChecker;
+        public IEntityBattle EntityBattle { get; private set; }
+        public IDamageable Target { get; set; }
 
         private void Awake()
         {
             _entity = GetComponent<Entity.Entity>();
+            EntityBattle = GetComponent<EntityBattle>();
+            _enemyTracker.Initialize();
         }
 
         private void OnValidate()
         {
-            if (_stateMachine == null)
-                throw new NullReferenceException($"{nameof(_stateMachine)} cannot be null");
-
             if (_nearbyDetector == null)
                 throw new NullReferenceException($"{nameof(_nearbyDetector)} cannot be null");
-        }
-
-        public IDamageable TakeTarget()
-        {
-            IDamageable target = Target;
-            Target = null;
-
-            return target;
         }
     }
 }

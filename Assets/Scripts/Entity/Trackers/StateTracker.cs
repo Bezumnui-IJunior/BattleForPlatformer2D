@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Entity.StaticDatas;
+using Entity.StaticData;
 using Physics;
 using UnityEngine;
 

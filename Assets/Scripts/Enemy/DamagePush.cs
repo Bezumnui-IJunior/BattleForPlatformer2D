@@ -1,5 +1,7 @@
-﻿using Entity;
+﻿using System.Collections;
+using Entity;
 using Entity.Trackers;
+using Misc;
 using UnityEngine;
 
 namespace Enemy
@@ -7,34 +9,36 @@ namespace Enemy
     [RequireComponent(typeof(EntityHealth))]
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(IMover))]
-    [RequireComponent(typeof(IStateTracker))]
-    public class DamagePush : MonoBehaviour
+    public class DamagePush : MonoBehaviour, ICoroutineExecutor
     {
         [SerializeField] private Vector2 _directionForce;
+        [SerializeField] private float _freezeSeconds = 0.5f;
 
         private EntityHealth _health;
         private Rigidbody2D _rigidbody;
-        private IStateTracker _tracker;
+
         private IMover _mover;
+        private CooldownTimer _freezeTimer;
 
         private void Awake()
         {
             _health = GetComponent<EntityHealth>();
             _rigidbody = GetComponent<Rigidbody2D>();
-            _tracker = GetComponent<IStateTracker>();
             _mover = GetComponent<IMover>();
+            _freezeTimer = new CooldownTimer(this, _freezeSeconds);
         }
 
         private void OnEnable()
         {
             _health.Damaged += OnDamage;
-            _tracker.GroundedTracker.Grounded += OnGrounded;
+            _freezeTimer.Freed += _mover.Enable;
         }
 
         private void OnDisable()
         {
             _health.Damaged -= OnDamage;
-            _tracker.GroundedTracker.Grounded -= OnGrounded;
+            _freezeTimer.Freed -= _mover.Enable;
+
         }
 
         private void OnDamage(IAttacker attacker)
@@ -42,11 +46,9 @@ namespace Enemy
             _rigidbody.linearVelocity = _directionForce;
             _rigidbody.linearVelocityX *= attacker.Transform.right.x;
             _mover.Disable();
+            _freezeTimer.Start();
         }
 
-        private void OnGrounded()
-        {
-            _mover.Enable();
-        }
+     
     }
 }
