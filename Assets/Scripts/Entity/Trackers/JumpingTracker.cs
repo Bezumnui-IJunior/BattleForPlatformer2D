@@ -1,7 +1,5 @@
 using System;
-using Entity.IState;
 using Misc;
-using UnityEngine;
 
 namespace Entity.Trackers
 {
@@ -29,7 +27,7 @@ namespace Entity.Trackers
             _isJump = true;
 
             _jumpCooldownTimer.Stop();
-            _jumpCooldownTimer.Accuse();
+            _jumpCooldownTimer.Start();
         }
 
         public override void Update()

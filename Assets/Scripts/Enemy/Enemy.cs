@@ -1,28 +1,41 @@
-﻿using UnityEngine;
+﻿using System;
+using Enemy.Trackers;
+using Entity;
+using Physics;
+using UnityEngine;
 
 namespace Enemy
 {
     [RequireComponent(typeof(Entity.Entity))]
-    [RequireComponent(typeof(EnemyMovement))]
+    [RequireComponent(typeof(EntityBattle))]
     public class Enemy : MonoBehaviour
     {
+        [SerializeField] private EnemyTracker _enemyTracker;
+        [SerializeField] private NearbyDetector _nearbyDetector;
+        [SerializeField] private AttackField _attackField;
+        [SerializeField] private WallChecker _wallChecker;
+
         private Entity.Entity _entity;
-        private EnemyMovement _movement;
         public IRotator Rotator => _entity.Rotator;
+        public NearbyDetector NearbyDetector => _nearbyDetector;
+        public EntityMotion Motion => _entity.Motion;
+        public IAttackField AttackField => _attackField;
+        public IEnemyTracker EnemyTracker => _enemyTracker;
+        public IWallChecker WallChecker => _wallChecker;
+        public IEntityBattle EntityBattle { get; private set; }
+        public IDamageable Target { get; set; }
 
         private void Awake()
         {
             _entity = GetComponent<Entity.Entity>();
-            _movement = GetComponent<EnemyMovement>();
+            EntityBattle = GetComponent<EntityBattle>();
+            _enemyTracker.Initialize();
         }
 
-        private void OnEnable() =>
-            _movement.Jumping += _entity.Motion.OnJumping;
-
-        private void Update() =>
-            _entity.Motion.GoWithSpeed(_movement.HorizontalSpeed);
-
-        private void OnDisable() =>
-            _movement.Jumping -= _entity.Motion.OnJumping;
+        private void OnValidate()
+        {
+            if (_nearbyDetector == null)
+                throw new NullReferenceException($"{nameof(_nearbyDetector)} cannot be null");
+        }
     }
 }

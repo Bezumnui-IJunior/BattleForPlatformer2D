@@ -1,28 +1,28 @@
-﻿using Entity.IState;
+﻿using Entity.Animators;
+using Entity.Trackers;
 using UnityEngine;
 
 namespace Entity
 {
     [RequireComponent(typeof(IMover))]
     [RequireComponent(typeof(IRotator))]
-    [RequireComponent(typeof(IEntityAnimator))]
     [RequireComponent(typeof(IStateTracker))]
-    public class Entity : MonoBehaviour
+    public class Entity : MonoBehaviour, IDieProvider
     {
         public IRotator Rotator { get; private set; }
-        public IMover Move { get; private set; }
         public EntityMotion Motion { get; private set; }
 
         private void Awake()
         {
-            IEntityAnimator animator = GetComponent<IEntityAnimator>();
+            IMotionAnimator motionAnimator = new MotionAnimator(GetComponent<Animator>());
             IStateTracker tracker = GetComponent<IStateTracker>();
+            IMover mover = GetComponent<IMover>();
+
             Rotator = GetComponent<IRotator>();
-            Move = GetComponent<IMover>();
 
             tracker.Initialize();
 
-            Motion = new EntityMotion(Move, Rotator, animator, tracker);
+            Motion = new EntityMotion(mover, Rotator, motionAnimator, tracker);
         }
 
         private void OnEnable() =>
@@ -30,5 +30,8 @@ namespace Entity
 
         private void OnDisable() =>
             Motion.OnDisable();
+
+        public void Die() =>
+            Destroy(gameObject);
     }
 }

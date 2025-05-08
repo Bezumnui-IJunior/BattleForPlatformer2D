@@ -1,6 +1,4 @@
 using System;
-using Entity.IState;
-using Move;
 using Physics;
 
 namespace Entity.Trackers

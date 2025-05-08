@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Physics
 {
-    public class WallChecker : MonoBehaviour
+    public class WallChecker : MonoBehaviour, IWallChecker
     {
         [SerializeField] private float _raySize = 1;
         [SerializeField] private LayerMask _mask;

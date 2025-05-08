@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Move
 {
-    public class Mover : MonoBehaviour, IMover, ITimerUser
+    public class Mover : MonoBehaviour, IMover, ICoroutineExecutor
     {
         [SerializeField] private float _speed = 100;
         [SerializeField] private float _jumpForce = 10;
@@ -23,8 +23,11 @@ namespace Move
             _cooldownTimer = new CooldownTimer(this, _cooldownSeconds);
         }
 
-        public void SetSpeedByX(float speed) =>
-            _rigidbody.linearVelocityX = speed * _speed;
+        public void SetSpeedByX(float speed)
+        {
+            if (enabled)
+                _rigidbody.linearVelocityX = speed * _speed;
+        }
 
         public void Jump()
         {
@@ -34,9 +37,19 @@ namespace Move
             if (_cooldownTimer.IsFree == false)
                 return;
 
-            _cooldownTimer.Accuse();
+            _cooldownTimer.Start();
             _rigidbody.linearVelocityY = 0;
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode2D.Impulse);
+        }
+
+        public void Enable()
+        {
+            enabled = true;
+        }
+
+        public void Disable()
+        {
+            enabled = false;
         }
     }
 }
