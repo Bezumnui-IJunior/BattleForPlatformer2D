@@ -8,11 +8,15 @@ namespace Enemy.Trackers
         [SerializeField] private float _attackCooldownSeconds;
 
         private AttackTracker _attackTracker;
-        public IAttackTracker AttackTracker => _attackTracker;
+        private MovementTracker _movementTracker;
+
+        public IAttackTracker Attack => _attackTracker;
+        public IMovementTracker Movement => _movementTracker;
 
         public void Initialize()
         {
             _attackTracker = new AttackTracker(this, _attackCooldownSeconds, _enemy.AttackField);
+            _movementTracker = new MovementTracker(_enemy);
         }
 
         private void OnEnable()

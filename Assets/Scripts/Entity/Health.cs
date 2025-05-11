@@ -1,42 +1,61 @@
 ﻿using System;
+using UI.View;
 using UnityEngine;
 
 namespace Entity
 {
     [RequireComponent(typeof(IDieProvider))]
-    public class EntityHealth : MonoBehaviour, IDamageable
+    public class EntityHealth : MonoBehaviour, IDamageable, IHealable, IChangeableValue
     {
-        [SerializeField] private float _initialValue = 100;
+        [SerializeField] private float _maxHealth = 100;
 
         private IDieProvider _dieProvider;
-        private float _value;
-        public event Action<IAttacker> Damaged;
-
+        public float Value { get; private set; }
+        public float MaxValue { get; private set; }
+        public float MinValue => 0;
+        public event Action Decreased;
+        public event Action Increased;
+        public event Action Initiated;
+        public bool IsAlive => Value > 0;
         public Transform Transform => transform;
-
-        public bool IsAlive => _value > 0;
-
+        public event Action<IAttacker> Damaged;
 
         private void Awake()
         {
             _dieProvider = GetComponent<IDieProvider>();
-            _value = _initialValue;
+            MaxValue = _maxHealth;
+            Value = _maxHealth;
+            Initiated?.Invoke();
         }
 
         public void Damage(IAttacker attacker, float damage)
         {
-            if (damage < 0)
+            if (TryDecreaseHealth(damage) == false)
                 return;
-
-            _value = Mathf.Max(_value - damage, 0);
 
             Damaged?.Invoke(attacker);
 
-            if (_value <= 0)
+            if (Value <= MinValue)
                 _dieProvider.Die();
-
-            Debug.Log($"{name}'s hp: {_value}");
+        }
+        
+        public void Heal(float amount)
+        {
+            Value = Mathf.Min(Value + amount, MaxValue);
+            Increased?.Invoke();
         }
 
+        private bool TryDecreaseHealth(float value)
+        {
+            if (value < MinValue)
+                return false;
+
+            Value = Mathf.Max(Value - value, MinValue);
+            Decreased?.Invoke();
+
+            return true;
+        }
+
+       
     }
 }

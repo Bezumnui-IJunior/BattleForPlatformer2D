@@ -6,23 +6,24 @@ namespace Entity
 {
     [RequireComponent(typeof(IMover))]
     [RequireComponent(typeof(IRotator))]
-    [RequireComponent(typeof(IStateTracker))]
-    public class Entity : MonoBehaviour, IDieProvider
+    [RequireComponent(typeof(IEntityTracker))]
+    public class Entity : MonoBehaviour
     {
         public IRotator Rotator { get; private set; }
         public EntityMotion Motion { get; private set; }
+        public IEntityTracker Tracker { get; private set; }
 
         private void Awake()
         {
             IMotionAnimator motionAnimator = new MotionAnimator(GetComponent<Animator>());
-            IStateTracker tracker = GetComponent<IStateTracker>();
+            Tracker = GetComponent<IEntityTracker>();
             IMover mover = GetComponent<IMover>();
 
             Rotator = GetComponent<IRotator>();
 
-            tracker.Initialize();
+            Tracker.Initialize();
 
-            Motion = new EntityMotion(mover, Rotator, motionAnimator, tracker);
+            Motion = new EntityMotion(mover, Rotator, motionAnimator, Tracker);
         }
 
         private void OnEnable() =>
@@ -31,7 +32,5 @@ namespace Entity
         private void OnDisable() =>
             Motion.OnDisable();
 
-        public void Die() =>
-            Destroy(gameObject);
     }
 }

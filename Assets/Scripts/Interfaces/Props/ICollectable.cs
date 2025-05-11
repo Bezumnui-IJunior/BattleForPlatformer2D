@@ -2,6 +2,6 @@ namespace Props
 {
     public interface ICollectable
     {
-        public void Yield();
+        public void Accept(ICollector collector);
     }
 }

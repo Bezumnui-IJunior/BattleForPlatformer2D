@@ -1,6 +1,4 @@
-﻿using Entity;
-using Misc;
-using Physics;
+﻿using Misc;
 using UnityEngine;
 
 namespace Enemy.States.Patrolling
@@ -9,10 +7,17 @@ namespace Enemy.States.Patrolling
     {
         [SerializeField] private Enemy _enemy;
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (_enemy.WallChecker.IsWall())
+            if (_enemy.EnemyTracker.Movement.IsSafeToStep() == false)
             {
+                if (_enemy.EntityTracker.Ground.IsGround == false)
+                {
+                    _enemy.Motion.GoWithSpeed(transform.right.x);
+
+                    return;
+                }
+
                 _enemy.Rotator.Toggle();
                 _enemy.Motion.Jump();
             }

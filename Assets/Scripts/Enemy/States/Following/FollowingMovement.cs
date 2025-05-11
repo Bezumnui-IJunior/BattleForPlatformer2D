@@ -20,13 +20,14 @@ namespace Enemy.States.Following
 
             Vector3 direction = _enemy.Target.Transform.position - transform.position;
 
-            if (_enemy.WallChecker.IsWall())
+            if (_enemy.WallChecker.IsObstacle())
             {
                 Motion.Jump();
-                return;
             }
-            
-            if (direction.x > 0)
+
+            if (_enemy.VoidChecker.IsObstacle() == false)
+                Motion.GoWithSpeed(0);
+            else if (direction.x > 0)
                 Motion.GoWithSpeed(RightSpeed);
             else
                 Motion.GoWithSpeed(LeftSpeed);

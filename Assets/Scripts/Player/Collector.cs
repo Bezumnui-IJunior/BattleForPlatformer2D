@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using Player.Collectables;
 using Props;
 using UnityEngine;
 
@@ -8,15 +6,13 @@ namespace Player
 {
     [RequireComponent(typeof(Player))]
     [RequireComponent(typeof(Collider2D))]
-    public class Collector : MonoBehaviour
+    public class Collector : MonoBehaviour, ICollector
     {
         private Player _player;
-        private readonly List<ICollector> _collectors = new();
 
         private void Awake()
         {
             _player = GetComponent<Player>();
-            _collectors.Add(new CoinCollector(_player));
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -24,10 +20,17 @@ namespace Player
             if (!other.TryGetComponent(out ICollectable collectable))
                 return;
 
-            if (_collectors.Any(collector => collector.TryCollect(collectable)))
-            {
-                collectable.Yield();
-            }
+            collectable.Accept(this);
+        }
+
+        public void Collect(Coin coin)
+        {
+            Debug.Log($"{_player.name} has collected a coin with amount of {coin.Amount}");
+        }
+
+        public void Collect(Medkit medkit)
+        {
+            _player.EntityHealth.Heal(medkit.Amount);
         }
     }
 }

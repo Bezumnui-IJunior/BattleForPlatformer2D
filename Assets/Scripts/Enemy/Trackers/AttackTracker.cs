@@ -21,6 +21,7 @@ namespace Enemy.Trackers
 
         public void Enable()
         {
+            CanAttack = true;
             _timer.Freed += OnCooldownPass;
             _attackField.TargetEntered += OnTargetEntered;
         }

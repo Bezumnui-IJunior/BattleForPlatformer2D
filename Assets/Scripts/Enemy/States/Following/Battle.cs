@@ -17,13 +17,13 @@ namespace Enemy.States.Following
 
         public void Enable()
         {
-            _enemy.EnemyTracker.AttackTracker.AttackAllowed += _timer.Start;
+            _enemy.EnemyTracker.Attack.AttackAllowed += _timer.Start;
             _timer.Freed += Attack;
         }
 
         public void Disable()
         {
-            _enemy.EnemyTracker.AttackTracker.AttackAllowed -= _timer.Start;
+            _enemy.EnemyTracker.Attack.AttackAllowed -= _timer.Start;
             _timer.Freed -= Attack;
         }
 

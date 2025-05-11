@@ -7,8 +7,9 @@ namespace Props
     {
         public int Amount => 1;
 
-        public void Yield()
+        public void Accept(ICollector collector)
         {
+            collector.Collect(this);
             Destroy();
         }
 

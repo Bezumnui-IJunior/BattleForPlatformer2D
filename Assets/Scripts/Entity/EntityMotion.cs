@@ -8,9 +8,9 @@ namespace Entity
         private readonly IMover _mover;
         private readonly IRotator _rotator;
         private readonly IMotionAnimator _motionAnimator;
-        private readonly IStateTracker _tracker;
+        private readonly IEntityTracker _tracker;
 
-        public EntityMotion(IMover mover, IRotator rotator, IMotionAnimator motionAnimator, IStateTracker tracker)
+        public EntityMotion(IMover mover, IRotator rotator, IMotionAnimator motionAnimator, IEntityTracker tracker)
         {
             _mover = mover;
             _rotator = rotator;
@@ -23,10 +23,10 @@ namespace Entity
 
         public void OnJumping()
         {
-            if (_tracker.JumpingTracker.CanJump() == false)
+            if (_tracker.Jump.CanJump() == false)
                 return;
 
-            _tracker.JumpingTracker.Jump();
+            _tracker.Jump.Jump();
             _mover.Jump();
             _motionAnimator.StartJumping();
         }
@@ -43,18 +43,18 @@ namespace Entity
 
         public void OnEnable()
         {
-            _tracker.WalkingTracker.WalkingStopped += OnStoppingWalking;
-            _tracker.JumpingTracker.JumpingStopped += OnStoppedJumping;
-            _tracker.FallingTracker.FallingStarting += OnStartingFall;
-            _tracker.FallingTracker.FallingStopped += OnStoppingFall;
+            _tracker.Walk.WalkingStopped += OnStoppingWalking;
+            _tracker.Jump.JumpingStopped += OnStoppedJump;
+            _tracker.Fall.FallingStarting += OnStartingFall;
+            _tracker.Fall.FallingStopped += OnStoppingFall;
         }
 
         public void OnDisable()
         {
-            _tracker.WalkingTracker.WalkingStopped -= OnStoppingWalking;
-            _tracker.JumpingTracker.JumpingStopped -= OnStoppedJumping;
-            _tracker.FallingTracker.FallingStarting -= OnStartingFall;
-            _tracker.FallingTracker.FallingStopped -= OnStoppingFall;
+            _tracker.Walk.WalkingStopped -= OnStoppingWalking;
+            _tracker.Jump.JumpingStopped -= OnStoppedJump;
+            _tracker.Fall.FallingStarting -= OnStartingFall;
+            _tracker.Fall.FallingStopped -= OnStoppingFall;
         }
 
         private void GoRight()
@@ -72,7 +72,7 @@ namespace Entity
         private void OnStoppingWalking() =>
             _motionAnimator.StopWalking();
 
-        private void OnStoppedJumping() =>
+        private void OnStoppedJump() =>
             _motionAnimator.StopJumping();
 
         private void OnStartingFall() =>
@@ -83,7 +83,7 @@ namespace Entity
 
         private void TryStartWalking()
         {
-            if (_tracker.WalkingTracker.TryStartWalk())
+            if (_tracker.Walk.TryStartWalk())
                 _motionAnimator.StartWalking();
         }
     }

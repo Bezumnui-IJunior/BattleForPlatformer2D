@@ -14,7 +14,7 @@ namespace Enemy
         private Enemy _enemy;
 
         public Transform Transform => _enemy.transform;
-        private IAttackTracker AttackTracker => _enemy.EnemyTracker.AttackTracker;
+        private IAttackTracker AttackTracker => _enemy.EnemyTracker.Attack;
 
         private void Awake()
         {

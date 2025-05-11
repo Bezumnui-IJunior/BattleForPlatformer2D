@@ -18,6 +18,8 @@ namespace Player
         private EntityMotion Motion => _entity.Motion;
         private EntityBattle _attacker;
         private Collider2D _collider;
+        public EntityHealth EntityHealth { get; private set; }
+
 
         private void Awake()
         {
@@ -25,6 +27,7 @@ namespace Player
             _input = GetComponent<IInput>();
             _collider = GetComponent<Collider2D>();
             _attacker = GetComponent<EntityBattle>();
+            EntityHealth = GetComponent<EntityHealth>();
         }
 
         private void OnEnable()

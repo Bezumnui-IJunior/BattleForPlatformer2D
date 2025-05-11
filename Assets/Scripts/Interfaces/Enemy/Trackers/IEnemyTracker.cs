@@ -2,6 +2,8 @@ namespace Enemy.Trackers
 {
     public interface IEnemyTracker
     {
-        IAttackTracker AttackTracker { get; }
+        IAttackTracker Attack { get; }
+        IMovementTracker Movement { get; }
+
     }
 }

@@ -2,6 +2,7 @@ namespace Props
 {
     public interface ICollector
     {
-        public bool TryCollect(ICollectable collectable);
+        public void Collect(Coin coin);
+        public void Collect(Medkit medkit);
     }
 }
