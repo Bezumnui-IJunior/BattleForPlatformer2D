@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Entity
 {
     [RequireComponent(typeof(IDieProvider))]
-    public class EntityHealth : MonoBehaviour, IDamageable, IHealable, IChangeableValue
+    public class EntityHealth : MonoBehaviour, IDamageable, IHealable, ISuckable, IChangeableValue
     {
         [SerializeField] private float _maxHealth = 100;
 
@@ -33,12 +33,21 @@ namespace Entity
             if (TryDecreaseHealth(damage) == false)
                 return;
 
-            Damaged?.Invoke(attacker);
-
-            if (Value <= MinValue)
-                _dieProvider.Die();
+            if (IsAlive)
+                Damaged?.Invoke(attacker);
         }
-        
+
+        public float TakeHealth(float maxHealth)
+        {
+            if (maxHealth > Value)
+                maxHealth = Value;
+
+            if (TryDecreaseHealth(maxHealth) == false)
+                return 0;
+
+            return maxHealth;
+        }
+
         public void Heal(float amount)
         {
             Value = Mathf.Min(Value + amount, MaxValue);
@@ -53,9 +62,10 @@ namespace Entity
             Value = Mathf.Max(Value - value, MinValue);
             Decreased?.Invoke();
 
+            if (Value <= MinValue)
+                _dieProvider.Die();
+
             return true;
         }
-
-       
     }
 }

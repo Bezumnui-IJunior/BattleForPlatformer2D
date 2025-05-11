@@ -52,6 +52,7 @@
     <Compile Include="Assets\Scripts\Entity\StaticData\TrackerData.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Entity\Trackers\IColliderTracker.cs" />
     <Compile Include="Assets\Scripts\Enemy\States\Patrolling\PatrollingMovement.cs" />
+    <Compile Include="Assets\Scripts\Entity\ISuckable.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IMover.cs" />
     <Compile Include="Assets\Scripts\Entity\Trackers\Tracker.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Entity\Trackers\IGroundedTracker.cs" />
@@ -60,6 +61,8 @@
     <Compile Include="Assets\Scripts\Entity\Trackers\GroundedTracker.cs" />
     <Compile Include="Assets\Scripts\UI\View\Bar.cs" />
     <Compile Include="Assets\Scripts\Enemy\Trackers\EnemyTracker.cs" />
+    <Compile Include="Assets\Scripts\Player\HealthSucker.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\Player\Trackers\ISuckTracker.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Entity\Trackers\EntityTracker.cs" />
     <Compile Include="Assets\Scripts\Attributes\RestrictDraw.cs" />
@@ -79,12 +82,14 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyDetector.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ICoroutineExecutor.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Props\ICollectable.cs" />
+    <Compile Include="Assets\Scripts\Player\Field.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Entity\IDieProvider.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Entity\Trackers\IJumpingTracker.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IRotator.cs" />
     <Compile Include="Assets\Scripts\UI\View\ICoroutineExecutor.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Entity\Animators\IMotionAnimator.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Entity\States\IStateMachine.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\Player\Trackers\IPlayerTracker.cs" />
     <Compile Include="Assets\Scripts\Entity\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Props\Medkit.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Enemy\Trackers\IAttackTracker.cs" />
@@ -100,8 +105,10 @@
     <Compile Include="Assets\Scripts\Player\Attacker.cs" />
     <Compile Include="Assets\Scripts\Physics\RayGroundChecker.cs" />
     <Compile Include="Assets\Scripts\Physics\BoxGroundChecker.cs" />
+    <Compile Include="Assets\Scripts\Player\HealthSuckerView.cs" />
     <Compile Include="Assets\Scripts\Physics\RayChecker.cs" />
     <Compile Include="Assets\Scripts\Enemy\States\Patrolling\PatrollingState.cs" />
+    <Compile Include="Assets\Scripts\Player\Trackers\PlayerTracker.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Misc\Toggle.cs" />
     <Compile Include="Assets\Scripts\Enemy\Trackers\AttackTracker.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Entity\IAttacker.cs" />
@@ -124,6 +131,7 @@
     <Compile Include="Assets\Scripts\UI\CanvasFollower.cs" />
     <Compile Include="Assets\Scripts\Interfaces\Entity\IHealable.cs" />
     <Compile Include="Assets\Scripts\Physics\NearbyDetector.cs" />
+    <Compile Include="Assets\Scripts\Player\Trackers\SuckTracker.cs" />
     <Compile Include="Assets\Scripts\Entity\Trackers\ColliderTracker.cs" />
     <Compile Include="Assets\Scripts\UI\FollowerPlaceholder.cs" />
     <Compile Include="Assets\Scripts\Enemy\Attacker.cs" />

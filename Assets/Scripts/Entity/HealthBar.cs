@@ -1,6 +1,5 @@
 using UI.View;
 using UnityEngine;
-using View;
 
 namespace Entity
 {
@@ -21,7 +20,6 @@ namespace Entity
         {
             _health.Initiated -= OnInitialized;
             _health.Decreased -= OnDecreased;
-
         }
 
         private void OnInitialized()

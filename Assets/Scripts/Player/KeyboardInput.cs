@@ -9,15 +9,16 @@ namespace Player
     {
         public event Action Jumping;
         public event Action Attacking;
+        public event Action Sucking;
 
         public float HorizontalSpeed { get; private set; }
-        
 
         private void Update()
         {
             const string HorizontalAxis = "Horizontal";
             const string JumpButton = "Jump";
             const int AttackButton = 0;
+            const int SuckButton = 1;
 
             HorizontalSpeed = Input.GetAxisRaw(HorizontalAxis);
 
@@ -26,6 +27,9 @@ namespace Player
 
             if (Input.GetMouseButtonDown(AttackButton))
                 Attacking?.Invoke();
+
+            if (Input.GetMouseButtonDown(SuckButton))
+                Sucking?.Invoke();
         }
     }
 }
