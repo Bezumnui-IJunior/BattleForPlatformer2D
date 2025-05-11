@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Entity;
 using Player.Trackers;
 using UnityEngine;
@@ -8,12 +7,12 @@ namespace Player
 {
     public class HealthSucker : MonoBehaviour, ICoroutineExecutor
     {
-        [SerializeField] private Player _player;
+        [SerializeField] private PlayerTracker _playerTracker;
+        [SerializeField] private SuckableDetector _suckableDetector;
+        [SerializeField] private EntityHealth _entityHealth;
         [SerializeField] private float _count = 20;
 
-        private List<ISuckable> _suckableList = new(10);
-
-        private ISuckTracker SuckTracker => _player.PlayerTracker.Suck;
+        private ISuckTracker SuckTracker => _playerTracker.Suck;
 
         private void OnEnable()
         {
@@ -35,30 +34,25 @@ namespace Player
 
         private void OnSucking()
         {
-            _player.SuckableDetector.GetNearbyColliders(ref _suckableList);
-            Debug.Log("Looking for target");
+            int size = _suckableDetector.GetNearbyColliders(out IEnumerable<ISuckable> result);
 
-            if (TryGetClosestSuckable(out ISuckable suckable) == false)
+            if (TryGetClosestSuckable(size, result, out ISuckable suckable) == false)
                 return;
 
-            ;
-            _player.EntityHealth.Heal(suckable.TakeHealth(_count));
-            Debug.Log("Suck");
+            _entityHealth.Heal(suckable.Damage(_count));
         }
 
-        private bool TryGetClosestSuckable(out ISuckable closestSuckable)
+        private bool TryGetClosestSuckable(int size, IEnumerable<ISuckable> suckables, out ISuckable closestSuckable)
         {
             closestSuckable = null;
 
-            if (_suckableList.Count == 0)
+            if (size == 0)
                 return false;
 
-            closestSuckable = _suckableList[0];
-            float closestDistance = GetDistanceTo(closestSuckable);
+            float closestDistance = float.MaxValue;
 
-            for (int i = 1; i < _suckableList.Count; i++)
+            foreach (ISuckable suckable in suckables)
             {
-                ISuckable suckable = _suckableList[i];
                 float distance = GetDistanceTo(suckable);
 
                 if (distance > closestDistance)
@@ -73,7 +67,7 @@ namespace Player
 
         private float GetDistanceTo(ISuckable suckable)
         {
-            return Vector3.Distance(suckable.Transform.position, transform.position);
+            return (suckable.Transform.position - transform.position).sqrMagnitude;
         }
     }
 }

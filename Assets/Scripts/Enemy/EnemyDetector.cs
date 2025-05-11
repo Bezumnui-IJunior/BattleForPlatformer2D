@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Entity;
 using Misc;
-using Physics;
 using UnityEngine;
 
 namespace Enemy
@@ -11,15 +10,15 @@ namespace Enemy
     [Serializable]
     public class EnemyDetector : IToggle
     {
-        private bool _enabled;
-        private WaitForSeconds _repeatDelay;
-        private IDamageable _enemy;
-        private NearbyDetector _nearbyDetector;
         private Coroutine _coroutine;
+        private List<IDamageable> _damageables = new(10);
+        private bool _enabled;
+        private IDamageable _enemy;
         private ICoroutineExecutor _executor;
-        private List<IDamageable> _damaged = new(10);
+        private EnemyNearbyDetector _nearbyDetector;
+        private WaitForSeconds _repeatDelay;
 
-        public EnemyDetector(ICoroutineExecutor executor, NearbyDetector nearbyDetector, float delaySeconds)
+        public EnemyDetector(ICoroutineExecutor executor, EnemyNearbyDetector nearbyDetector, float delaySeconds)
         {
             _executor = executor;
             _nearbyDetector = nearbyDetector;
@@ -27,12 +26,6 @@ namespace Enemy
         }
 
         public event Action<IDamageable> EnemyDetected;
-
-        public void Restart()
-        {
-            Disable();
-            Enable();
-        }
 
         public void Enable()
         {
@@ -52,19 +45,30 @@ namespace Enemy
             _executor.StopCoroutine(_coroutine);
         }
 
+        public void Restart()
+        {
+            Disable();
+            Enable();
+        }
+
         private IEnumerator Detecting()
         {
             while (_enabled)
             {
-                _nearbyDetector.GetNearbyColliders(ref _damaged);
+                _nearbyDetector.GetNearbyColliders(out IEnumerable<IDamageable> damageables);
+                CopyIEnumerable(damageables);
 
-                foreach (IDamageable damageable in _damaged)
-                {
-                    EnemyDetected?.Invoke(damageable);
-                }
+                foreach (IDamageable damageable in _damageables) EnemyDetected?.Invoke(damageable);
 
                 yield return _repeatDelay;
             }
+        }
+
+        private void CopyIEnumerable(IEnumerable<IDamageable> damageables)
+        {
+            _damageables.Clear();
+
+            foreach (IDamageable damageable in damageables) _damageables.Add(damageable);
         }
     }
 }

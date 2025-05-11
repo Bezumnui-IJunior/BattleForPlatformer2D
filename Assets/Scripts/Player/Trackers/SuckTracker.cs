@@ -6,8 +6,8 @@ namespace Player.Trackers
 {
     public class SuckTracker : ISuckTracker, IToggle
     {
-        private readonly CooldownTimer _cooldownTimer;
         private readonly CooldownTimer _actionTimer;
+        private readonly CooldownTimer _cooldownTimer;
         private readonly int _maxCount;
         private IEnumerator _enumerator;
 
@@ -18,11 +18,23 @@ namespace Player.Trackers
             _maxCount = count;
         }
 
-        public bool CanSuck { get; private set; }
         public bool IsSuck { get; private set; }
+
+        public bool CanSuck { get; private set; }
 
         public event Action Sucking;
         public event Action SuckStopped;
+
+        public void StartSuck()
+        {
+            if (CanSuck == false)
+                return;
+
+            CanSuck = false;
+            IsSuck = false;
+            _enumerator = SuckingEnumerator();
+            _enumerator.MoveNext();
+        }
 
         public void Enable()
         {
@@ -35,17 +47,6 @@ namespace Player.Trackers
         {
             _cooldownTimer.Freed -= OnCooldownTimerFreed;
             _actionTimer.Freed -= OnActionTimerFreed;
-        }
-
-        public void StartSuck()
-        {
-            if (CanSuck == false)
-                return;
-
-            CanSuck = false;
-            IsSuck = false;
-            _enumerator = SuckingEnumerator();
-            _enumerator.MoveNext();
         }
 
         private IEnumerator SuckingEnumerator()

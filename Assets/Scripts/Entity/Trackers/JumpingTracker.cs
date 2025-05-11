@@ -9,13 +9,14 @@ namespace Entity.Trackers
         private readonly CooldownTimer _jumpCooldownTimer;
 
         private bool _isJump;
-        public event Action JumpingStopped;
 
         public JumpingTracker(EntityTracker entityTracker, float jumpCooldown)
         {
             _entityTracker = entityTracker;
             _jumpCooldownTimer = new CooldownTimer(entityTracker, jumpCooldown);
         }
+
+        public event Action JumpingStopped;
 
         public bool CanJump()
         {

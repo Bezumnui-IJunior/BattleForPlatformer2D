@@ -4,8 +4,8 @@ namespace Enemy.Trackers
 {
     public interface IAttackTracker
     {
-        event Action AttackAllowed;
         bool CanAttack { get; }
+        event Action AttackAllowed;
         void Attack();
     }
 }

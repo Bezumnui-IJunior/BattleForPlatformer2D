@@ -7,10 +7,9 @@ namespace Misc
     public class CooldownTimer
     {
         private readonly WaitForSeconds _delay;
+        private readonly ICoroutineExecutor _user;
 
         private Coroutine _coroutine;
-        private readonly ICoroutineExecutor _user;
-        public event Action Freed;
 
         public CooldownTimer(ICoroutineExecutor user, float delaySeconds)
         {
@@ -20,6 +19,7 @@ namespace Misc
         }
 
         public bool IsFree { get; private set; }
+        public event Action Freed;
 
         public void Restart()
         {

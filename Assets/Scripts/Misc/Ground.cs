@@ -4,6 +4,5 @@ namespace Misc
 {
     public class Ground : MonoBehaviour
     {
-        
     }
 }

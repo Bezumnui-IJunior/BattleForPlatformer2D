@@ -20,10 +20,7 @@ namespace Enemy.States.Following
 
             Vector3 direction = _enemy.Target.Transform.position - transform.position;
 
-            if (_enemy.WallChecker.IsObstacle())
-            {
-                Motion.Jump();
-            }
+            if (_enemy.WallChecker.IsObstacle()) Motion.Jump();
 
             if (_enemy.VoidChecker.IsObstacle() == false)
                 Motion.GoWithSpeed(0);
@@ -33,10 +30,14 @@ namespace Enemy.States.Following
                 Motion.GoWithSpeed(LeftSpeed);
         }
 
-        public void Enable() =>
+        public void Enable()
+        {
             enabled = true;
+        }
 
-        public void Disable() =>
+        public void Disable()
+        {
             enabled = false;
+        }
     }
 }

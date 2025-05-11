@@ -5,8 +5,8 @@ namespace Entity.Trackers
 {
     public class WalkingTracker : Tracker, IWalkingTracker
     {
-        private bool _isWalk;
         private readonly Rigidbody2D _rigidbody;
+        private bool _isWalk;
 
         public WalkingTracker(Rigidbody2D rigidbody)
         {
@@ -14,16 +14,6 @@ namespace Entity.Trackers
         }
 
         public event Action WalkingStopped;
-
-        public override void Update()
-        {
-            bool isWalk = _rigidbody.linearVelocityX == 0;
-
-            if (_isWalk && isWalk)
-                WalkingStopped?.Invoke();
-
-            _isWalk = isWalk;
-        }
 
         public bool TryStartWalk()
         {
@@ -33,6 +23,16 @@ namespace Entity.Trackers
             _isWalk = true;
 
             return true;
+        }
+
+        public override void Update()
+        {
+            bool isWalk = _rigidbody.linearVelocityX == 0;
+
+            if (_isWalk && isWalk)
+                WalkingStopped?.Invoke();
+
+            _isWalk = isWalk;
         }
     }
 }

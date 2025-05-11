@@ -5,11 +5,11 @@ namespace Attributes
 {
     public class Restrict : PropertyAttribute
     {
-        public Type Type { get; private set; }
-
         public Restrict(Type type)
         {
             Type = type;
         }
+
+        public Type Type { get; private set; }
     }
 }

@@ -4,8 +4,8 @@ namespace Move
 {
     public class Rotator : MonoBehaviour, IRotator
     {
-        private readonly Quaternion _rightRotation = Quaternion.identity;
         private readonly Quaternion _leftRotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        private readonly Quaternion _rightRotation = Quaternion.identity;
 
         public void Toggle()
         {
@@ -31,7 +31,9 @@ namespace Move
             transform.rotation = _leftRotation;
         }
 
-        private bool IsLookRight() =>
-            transform.right.x > 0;
+        private bool IsLookRight()
+        {
+            return transform.right.x > 0;
+        }
     }
 }

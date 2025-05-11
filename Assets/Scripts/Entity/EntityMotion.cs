@@ -5,9 +5,9 @@ namespace Entity
 {
     public class EntityMotion
     {
+        private readonly IMotionAnimator _motionAnimator;
         private readonly IMover _mover;
         private readonly IRotator _rotator;
-        private readonly IMotionAnimator _motionAnimator;
         private readonly IEntityTracker _tracker;
 
         public EntityMotion(IMover mover, IRotator rotator, IMotionAnimator motionAnimator, IEntityTracker tracker)
@@ -18,8 +18,10 @@ namespace Entity
             _tracker = tracker;
         }
 
-        public void Jump() =>
+        public void Jump()
+        {
             OnJumping();
+        }
 
         public void OnJumping()
         {
@@ -69,17 +71,25 @@ namespace Entity
             TryStartWalking();
         }
 
-        private void OnStoppingWalking() =>
+        private void OnStoppingWalking()
+        {
             _motionAnimator.StopWalking();
+        }
 
-        private void OnStoppedJump() =>
+        private void OnStoppedJump()
+        {
             _motionAnimator.StopJumping();
+        }
 
-        private void OnStartingFall() =>
+        private void OnStartingFall()
+        {
             _motionAnimator.StartFalling();
+        }
 
-        private void OnStoppingFall() =>
+        private void OnStoppingFall()
+        {
             _motionAnimator.StopFalling();
+        }
 
         private void TryStartWalking()
         {

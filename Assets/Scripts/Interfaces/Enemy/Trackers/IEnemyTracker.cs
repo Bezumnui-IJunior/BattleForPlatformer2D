@@ -4,6 +4,5 @@ namespace Enemy.Trackers
     {
         IAttackTracker Attack { get; }
         IMovementTracker Movement { get; }
-
     }
 }

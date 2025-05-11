@@ -7,6 +7,12 @@ namespace Entity.Trackers
     {
         private readonly IGroundChecker _groundChecker;
 
+        public GroundedTracker(IGroundChecker groundChecker)
+        {
+            _groundChecker = groundChecker;
+            IsGround = _groundChecker.IsGrounded();
+        }
+
         public event Action Grounded;
         public bool IsGround { get; private set; }
 
@@ -14,10 +20,8 @@ namespace Entity.Trackers
         {
             if (_groundChecker.IsGrounded())
             {
-                if (IsGround == false)
-                {
+                if (IsGround == false) 
                     Grounded?.Invoke();
-                }
 
                 IsGround = true;
 
@@ -25,12 +29,6 @@ namespace Entity.Trackers
             }
 
             IsGround = false;
-        }
-
-        public GroundedTracker(IGroundChecker groundChecker)
-        {
-            _groundChecker = groundChecker;
-            IsGround = _groundChecker.IsGrounded();
         }
     }
 }

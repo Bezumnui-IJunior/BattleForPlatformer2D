@@ -1,4 +1,3 @@
-using System;
 using Enemy.States;
 using UnityEngine;
 
@@ -13,10 +12,14 @@ namespace Entity.States
             StateMachine = GetComponent<StateMachine>();
         }
 
-        public void Occupy() =>
+        public void Occupy()
+        {
             enabled = true;
+        }
 
-        public void Exit() =>
+        public void Exit()
+        {
             enabled = false;
+        }
     }
 }

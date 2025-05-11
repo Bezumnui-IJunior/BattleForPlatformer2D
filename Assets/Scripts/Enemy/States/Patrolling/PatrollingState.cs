@@ -1,4 +1,3 @@
-using System;
 using Enemy.States.Following;
 using Entity;
 using Entity.States;
@@ -32,13 +31,11 @@ namespace Enemy.States.Patrolling
             _detector.EnemyDetected -= OnEnemyDetected;
             _movement.Disable();
             _detector.Disable();
-
         }
 
         private void OnEnemyDetected(IDamageable damageable)
         {
             _enemy.Target = damageable;
-            Debug.Log($"{damageable.Transform.name} detected");
             StateMachine.ChangeState<FollowingState>();
         }
     }

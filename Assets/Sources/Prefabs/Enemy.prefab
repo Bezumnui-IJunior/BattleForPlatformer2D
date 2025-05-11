@@ -167,7 +167,7 @@ MonoBehaviour:
   _changeable: {fileID: 2371447121684051057}
   _delta: 30
   _colorDelaySeconds: 0.3
-  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _defaultColor: {r: 0.40741688, g: 1, b: 0.3443396, a: 1}
   _decreaseColor: {r: 1, g: 0, b: 0, a: 1}
   _increaseColor: {r: 0, g: 1, b: 1, a: 1}
   _fillTexture: {fileID: 3960309815558925557}
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyTracker: {fileID: 6942768618878386868}
-  _nearbyDetector: {fileID: 6943380088829221438}
+  _nearbyDetector: {fileID: 592917736199812565}
   _attackField: {fileID: 6323183755643408817}
   _wallChecker: {fileID: 6786739797114667610}
   _voidChecker: {fileID: 8822948951587206433}
@@ -1149,7 +1149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2262825135905230500}
-  - component: {fileID: 6943380088829221438}
+  - component: {fileID: 592917736199812565}
   m_Layer: 0
   m_Name: NearbyDetector
   m_TagString: Untagged
@@ -1172,7 +1172,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5446251894108423648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6943380088829221438
+--- !u!114 &592917736199812565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1181,10 +1181,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5902562254418270402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1140d8fabe194edcb331875ad5bd1c6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 638c5f6ea77f46f6b8592601c8dc90c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3
+  _radius: 3.22
   _filter:
     useTriggers: 0
     useLayerMask: 0
@@ -1201,8 +1201,8 @@ MonoBehaviour:
     maxNormalAngle: 0
   _ignoreCollider: {fileID: 2726202186866060016}
   _circleColor: {r: 1, g: 1, b: 1, a: 1}
-  _colliderColor: {r: 0.3006258, g: 0.4056604, b: 0.28893736, a: 1}
-  _colliderShape: {x: 0.2, y: 0.2, z: 1}
+  _colliderColor: {r: 1, g: 1, b: 1, a: 1}
+  _colliderShape: {x: 1, y: 1, z: 1}
 --- !u!1 &8015702284130192211
 GameObject:
   m_ObjectHideFlags: 0

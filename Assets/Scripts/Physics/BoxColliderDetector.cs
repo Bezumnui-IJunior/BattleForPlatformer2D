@@ -12,6 +12,12 @@ namespace Physics
 
         private readonly List<Collider2D> _colliders = new(10);
 
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = _gizmosColor;
+            Gizmos.DrawWireCube(transform.position, _size);
+        }
+
         public bool TryGetCollided<T>(out T component)
         {
             component = default;
@@ -30,12 +36,6 @@ namespace Physics
             }
 
             return false;
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = _gizmosColor;
-            Gizmos.DrawWireCube(transform.position, _size);
         }
     }
 }

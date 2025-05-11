@@ -7,7 +7,7 @@ namespace UI.View
 {
     public abstract class Bar : MonoBehaviour, IToggle
     {
-        [SerializeField, Restrict(typeof(IChangeableValue))]
+        [SerializeField] [Restrict(typeof(IChangeableValue))]
         private Object _changeable;
 
         protected Slider Slider { get; private set; }
@@ -34,16 +34,6 @@ namespace UI.View
             Changeable.Initiated -= OnInitiated;
         }
 
-        private void OnInitiated()
-        {
-            Slider.minValue = Changeable.MinValue;
-            Slider.maxValue = Changeable.MaxValue;
-            Slider.value = Changeable.Value;
-        }
-
-        protected abstract void OnDecreased();
-        protected abstract void OnIncreased();
-
         public void Enable()
         {
             gameObject.SetActive(true);
@@ -53,5 +43,15 @@ namespace UI.View
         {
             gameObject.SetActive(false);
         }
+
+        private void OnInitiated()
+        {
+            Slider.minValue = Changeable.MinValue;
+            Slider.maxValue = Changeable.MaxValue;
+            Slider.value = Changeable.Value;
+        }
+
+        protected abstract void OnDecreased();
+        protected abstract void OnIncreased();
     }
 }

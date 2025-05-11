@@ -13,9 +13,9 @@ namespace Enemy.States.Following
         [SerializeField] private float _attackDelay = 0.4f;
         [SerializeField] private FollowingMovement _movement;
         [SerializeField] private Enemy _enemy;
-
-        private EnemyDetector _detector;
+        
         private CalmTimer _calmTimer;
+        private EnemyDetector _detector;
         private IDamageable _target;
 
         private List<IToggle> _toggles;

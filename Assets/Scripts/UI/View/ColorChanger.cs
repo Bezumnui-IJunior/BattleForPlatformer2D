@@ -6,9 +6,9 @@ namespace View
 {
     public class ColorChanger
     {
-        private readonly Image _image;
         private readonly ICoroutineExecutor _coroutineExecutor;
         private readonly WaitForSeconds _delay;
+        private readonly Image _image;
         private Coroutine _coroutine;
 
         public ColorChanger(ICoroutineExecutor coroutineExecutor, Image image, float delaySeconds)

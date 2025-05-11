@@ -9,10 +9,16 @@ namespace Physics
         [SerializeField] private ContactFilter2D _filter;
         [SerializeField] private Color _gizmosColor;
 
-        [SerializeField, Header("Optional"), CanBeNull]
+        [SerializeField] [Header("Optional")] [CanBeNull]
         private Collider2D _ignoredCollider;
 
         private readonly Collider2D[] _collidersResults = new Collider2D[2];
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = _gizmosColor;
+            Gizmos.DrawWireCube(transform.position, _size);
+        }
 
         public bool IsGrounded()
         {
@@ -22,18 +28,10 @@ namespace Physics
                 return false;
 
             for (int i = 0; i < size; i++)
-            {
                 if (_collidersResults[i] != _ignoredCollider)
                     return true;
-            }
 
             return false;
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = _gizmosColor;
-            Gizmos.DrawWireCube(transform.position, _size);
         }
     }
 }

@@ -16,16 +16,17 @@ namespace View
         [SerializeField] private Color _decreaseColor = Color.red;
         [SerializeField] private Color _increaseColor = Color.cyan;
         [SerializeField] private Image _fillTexture;
+        private ColorChanger _colorChanger;
 
         private Coroutine _coroutine;
         private WaitForEndOfFrameUnit _delay;
-        private ColorChanger _colorChanger;
 
         protected override void Awake()
         {
             base.Awake();
             _delay = new WaitForEndOfFrameUnit();
             _colorChanger = new ColorChanger(this, _fillTexture, _colorDelaySeconds);
+            _colorChanger.SetDefaultDelayed(_defaultColor);
         }
 
         protected override void OnDecreased()
@@ -52,7 +53,7 @@ namespace View
 
                 yield return _delay;
             }
-            
+
             if (Changeable.Value == 0)
                 _colorChanger.SetDefaultDelayed(_decreaseColor);
             else

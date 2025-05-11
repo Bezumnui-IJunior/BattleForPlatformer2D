@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Player.Trackers
+﻿namespace Player.Trackers
 {
     public interface IPlayerTracker
     {

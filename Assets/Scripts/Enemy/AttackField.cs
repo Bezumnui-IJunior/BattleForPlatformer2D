@@ -9,9 +9,8 @@ namespace Enemy
     public class AttackField : MonoBehaviour, IAttackField
     {
         [SerializeField] private Enemy _enemy;
-
+        
         public bool IsContainTarget { get; private set; }
-
         public event Action TargetEntered;
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -36,5 +35,7 @@ namespace Enemy
 
             IsContainTarget = false;
         }
+
+      
     }
 }

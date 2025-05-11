@@ -15,22 +15,34 @@ namespace Entity.Animators
             _animator = animator;
         }
 
-        public void StartWalking() =>
+        public void StartWalking()
+        {
             _animator.SetBool(IsWalkAnimation, true);
+        }
 
-        public void StopWalking() =>
+        public void StopWalking()
+        {
             _animator.SetBool(IsWalkAnimation, false);
+        }
 
-        public void StartJumping() =>
+        public void StartJumping()
+        {
             _animator.SetBool(IsJumpAnimation, true);
+        }
 
-        public void StopJumping() =>
+        public void StopJumping()
+        {
             _animator.SetBool(IsJumpAnimation, false);
+        }
 
-        public void StartFalling() =>
+        public void StartFalling()
+        {
             _animator.SetBool(IsFallAnimation, true);
+        }
 
-        public void StopFalling() =>
+        public void StopFalling()
+        {
             _animator.SetBool(IsFallAnimation, false);
+        }
     }
 }

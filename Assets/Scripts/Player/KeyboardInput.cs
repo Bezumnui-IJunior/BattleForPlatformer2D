@@ -7,11 +7,11 @@ namespace Player
     [RequireComponent(typeof(EntityBattle))]
     public class KeyboardInput : MonoBehaviour, IInput
     {
+        public float HorizontalSpeed { get; private set; }
+
         public event Action Jumping;
         public event Action Attacking;
         public event Action Sucking;
-
-        public float HorizontalSpeed { get; private set; }
 
         private void Update()
         {

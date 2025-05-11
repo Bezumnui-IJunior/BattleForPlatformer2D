@@ -12,14 +12,14 @@ namespace Enemy
     public class Enemy : MonoBehaviour, IDieProvider
     {
         [SerializeField] private EnemyTracker _enemyTracker;
-        [SerializeField] private NearbyDetector _nearbyDetector;
+        [SerializeField] private EnemyNearbyDetector _nearbyDetector;
         [SerializeField] private AttackField _attackField;
         [SerializeField] private RayChecker _wallChecker;
         [SerializeField] private RayChecker _voidChecker;
 
         private Entity.Entity _entity;
         public IRotator Rotator => _entity.Rotator;
-        public NearbyDetector NearbyDetector => _nearbyDetector;
+        public EnemyNearbyDetector NearbyDetector => _nearbyDetector;
         public EntityMotion Motion => _entity.Motion;
         public IAttackField AttackField => _attackField;
         public IEntityTracker EntityTracker => _entity.Tracker;
@@ -42,7 +42,9 @@ namespace Enemy
                 throw new NullReferenceException($"{nameof(_nearbyDetector)} cannot be null");
         }
 
-        public void Die() =>
+        public void Die()
+        {
             Destroy(gameObject);
+        }
     }
 }

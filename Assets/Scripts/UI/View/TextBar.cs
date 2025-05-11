@@ -8,7 +8,7 @@ namespace View
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class TextBar : MonoBehaviour
     {
-        [SerializeField, Restrict(typeof(IChangeableValue))]
+        [SerializeField] [Restrict(typeof(IChangeableValue))]
         private Object _changeable;
 
         private TextMeshProUGUI _textMeshPro;

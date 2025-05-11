@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 8769733124933233503}
-  _fieldPrefab: {fileID: 92987293872537307, guid: 0b37ba235df22904b94c879f77805e9b, type: 3}
+  _suckerFieldPrefab: {fileID: 92987293872537307, guid: 0b37ba235df22904b94c879f77805e9b, type: 3}
 --- !u!1 &842870093399217220
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDetector: {fileID: 8446321033576261698}
-  _suckableDetector: {fileID: 5417706825322275380}
+  _suckableDetector: {fileID: 3350529811484900632}
   _tracker: {fileID: 3401827922987142122}
   _healthSucker: {fileID: 8315268650958709875}
 --- !u!114 &3501810303170214972
@@ -451,7 +451,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b86361c0654e4cb5f9b3e84830f2c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 8769733124933233503}
+  _playerTracker: {fileID: 3401827922987142122}
+  _suckableDetector: {fileID: 3350529811484900632}
+  _entityHealth: {fileID: 5025864769956635466}
   _count: 20
 --- !u!1 &3039257261666580892
 GameObject:
@@ -692,7 +694,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7910227135374825521}
-  - component: {fileID: 5417706825322275380}
+  - component: {fileID: 3350529811484900632}
   m_Layer: 0
   m_Name: SuckableDetector
   m_TagString: Untagged
@@ -715,7 +717,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2532949129094360990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5417706825322275380
+--- !u!114 &3350529811484900632
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -724,10 +726,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8128947085062848184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1140d8fabe194edcb331875ad5bd1c6a, type: 3}
+  m_Script: {fileID: 11500000, guid: b68b90230a6f418b9061c767dac9964d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 3.66
+  _radius: 3.33
   _filter:
     useTriggers: 0
     useLayerMask: 0

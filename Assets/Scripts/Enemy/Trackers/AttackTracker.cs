@@ -8,8 +8,6 @@ namespace Enemy.Trackers
         private readonly IAttackField _attackField;
         private readonly CooldownTimer _timer;
 
-        public bool CanAttack { get; private set; } = true;
-
         public AttackTracker(ICoroutineExecutor executor, float cooldownSeconds, IAttackField attackField)
         {
             _attackField = attackField;
@@ -17,7 +15,15 @@ namespace Enemy.Trackers
             _timer = new CooldownTimer(executor, cooldownSeconds);
         }
 
+        public bool CanAttack { get; private set; } = true;
+
         public event Action AttackAllowed;
+
+        public void Attack()
+        {
+            CanAttack = false;
+            _timer.Start();
+        }
 
         public void Enable()
         {
@@ -30,12 +36,6 @@ namespace Enemy.Trackers
         {
             _timer.Freed -= OnCooldownPass;
             _attackField.TargetEntered -= OnTargetEntered;
-        }
-
-        public void Attack()
-        {
-            CanAttack = false;
-            _timer.Start();
         }
 
         private void OnCooldownPass()

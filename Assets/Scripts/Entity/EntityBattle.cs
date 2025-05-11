@@ -7,8 +7,8 @@ namespace Entity
     [RequireComponent(typeof(IAttacker))]
     public class EntityBattle : MonoBehaviour, IEntityBattle
     {
-        private IAttacker _attacker;
         private IBattleAnimator _animator;
+        private IAttacker _attacker;
 
         private void Awake()
         {

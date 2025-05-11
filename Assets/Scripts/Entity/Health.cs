@@ -10,15 +10,6 @@ namespace Entity
         [SerializeField] private float _maxHealth = 100;
 
         private IDieProvider _dieProvider;
-        public float Value { get; private set; }
-        public float MaxValue { get; private set; }
-        public float MinValue => 0;
-        public event Action Decreased;
-        public event Action Increased;
-        public event Action Initiated;
-        public bool IsAlive => Value > 0;
-        public Transform Transform => transform;
-        public event Action<IAttacker> Damaged;
 
         private void Awake()
         {
@@ -27,6 +18,17 @@ namespace Entity
             Value = _maxHealth;
             Initiated?.Invoke();
         }
+
+        public float Value { get; private set; }
+        public float MaxValue { get; private set; }
+        public float MinValue => 0;
+        public event Action Decreased;
+        public event Action Increased;
+        public event Action Initiated;
+        public bool IsAlive => Value > 0;
+        public Transform Transform => transform;
+
+        public event Action<IAttacker> Damaged;
 
         public void Damage(IAttacker attacker, float damage)
         {
@@ -37,7 +39,13 @@ namespace Entity
                 Damaged?.Invoke(attacker);
         }
 
-        public float TakeHealth(float maxHealth)
+        public void Heal(float amount)
+        {
+            Value = Mathf.Min(Value + amount, MaxValue);
+            Increased?.Invoke();
+        }
+
+        public float Damage(float maxHealth)
         {
             if (maxHealth > Value)
                 maxHealth = Value;
@@ -46,12 +54,6 @@ namespace Entity
                 return 0;
 
             return maxHealth;
-        }
-
-        public void Heal(float amount)
-        {
-            Value = Mathf.Min(Value + amount, MaxValue);
-            Increased?.Invoke();
         }
 
         private bool TryDecreaseHealth(float value)

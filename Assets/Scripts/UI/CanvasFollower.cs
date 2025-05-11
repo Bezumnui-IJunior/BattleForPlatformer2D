@@ -6,7 +6,7 @@ namespace UI
     public class CanvasFollower : MonoBehaviour
     {
         [SerializeField] private FollowerPlaceholder _target;
-        
+
         private Camera _camera;
         private RectTransform RectTransform => (RectTransform)transform;
 

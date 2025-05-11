@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Props;
 using UnityEngine;
 
@@ -25,7 +24,8 @@ namespace Player
 
         public void Collect(Coin coin)
         {
-            Debug.Log($"{_player.name} has collected a coin with amount of {coin.Amount}");
+            Debug.Log(
+                $"{_player.name} has collected a coin with amount of {coin.Amount}. I don't have a wallet impl so do not blame me");
         }
 
         public void Collect(Medkit medkit)

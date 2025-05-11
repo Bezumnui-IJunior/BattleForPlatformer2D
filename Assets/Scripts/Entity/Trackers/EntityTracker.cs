@@ -10,14 +10,30 @@ namespace Entity.Trackers
     public class EntityTracker : MonoBehaviour, IEntityTracker, ICoroutineExecutor
     {
         [SerializeField] private TrackerData _trackerData;
-
-        private FallingTracker _fall;
-        private JumpingTracker _jump;
-        private WalkingTracker _walk;
-        private GroundedTracker _ground;
         private ColliderTracker _colliderTracker;
 
+        private FallingTracker _fall;
+        private GroundedTracker _ground;
+        private JumpingTracker _jump;
+
         private List<Tracker> _trackers;
+        private WalkingTracker _walk;
+
+        private void Update()
+        {
+            foreach (Tracker tracker in _trackers)
+                tracker.Update();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            _colliderTracker.TriggerEnter2D(other);
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            _colliderTracker.TriggerExit2D(other);
+        }
 
         public IFallingTracker Fall => _fall;
         public IJumpingTracker Jump => _jump;
@@ -40,22 +56,10 @@ namespace Entity.Trackers
                 _fall,
                 _jump,
                 _walk,
-                _ground,
+                _ground
             };
 
             _trackers = new List<Tracker>(trackers);
         }
-
-        private void Update()
-        {
-            foreach (Tracker tracker in _trackers)
-                tracker.Update();
-        }
-
-        private void OnTriggerEnter2D(Collider2D other) =>
-            _colliderTracker.TriggerEnter2D(other);
-
-        private void OnTriggerExit2D(Collider2D other) =>
-            _colliderTracker.TriggerExit2D(other);
     }
 }

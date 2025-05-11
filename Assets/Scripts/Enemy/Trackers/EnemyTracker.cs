@@ -10,15 +10,6 @@ namespace Enemy.Trackers
         private AttackTracker _attackTracker;
         private MovementTracker _movementTracker;
 
-        public IAttackTracker Attack => _attackTracker;
-        public IMovementTracker Movement => _movementTracker;
-
-        public void Initialize()
-        {
-            _attackTracker = new AttackTracker(this, _attackCooldownSeconds, _enemy.AttackField);
-            _movementTracker = new MovementTracker(_enemy);
-        }
-
         private void OnEnable()
         {
             _attackTracker.Enable();
@@ -27,6 +18,15 @@ namespace Enemy.Trackers
         private void OnDisable()
         {
             _attackTracker.Disable();
+        }
+
+        public IAttackTracker Attack => _attackTracker;
+        public IMovementTracker Movement => _movementTracker;
+
+        public void Initialize()
+        {
+            _attackTracker = new AttackTracker(this, _attackCooldownSeconds, _enemy.AttackField);
+            _movementTracker = new MovementTracker(_enemy);
         }
     }
 }

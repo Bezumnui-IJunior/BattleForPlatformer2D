@@ -8,10 +8,14 @@ namespace Entity.Trackers
         public event Action<Collider2D> OnTriggerEnter;
         public event Action<Collider2D> OnTriggerExit;
 
-        public void TriggerEnter2D(Collider2D other) =>
+        public void TriggerEnter2D(Collider2D other)
+        {
             OnTriggerEnter?.Invoke(other);
+        }
 
-        public void TriggerExit2D(Collider2D other) =>
+        public void TriggerExit2D(Collider2D other)
+        {
             OnTriggerExit?.Invoke(other);
+        }
     }
 }

@@ -9,12 +9,11 @@ namespace Move
         [SerializeField] private float _speed = 100;
         [SerializeField] private float _jumpForce = 10;
         [SerializeField] private float _cooldownSeconds = .2f;
-
-        private GroundChecker _groundChecker;
-        private Rigidbody2D _rigidbody;
+        
         private CooldownTimer _cooldownTimer;
-
+        private GroundChecker _groundChecker;
         private bool _isMove;
+        private Rigidbody2D _rigidbody;
 
         private void Awake()
         {

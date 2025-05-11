@@ -6,8 +6,8 @@ namespace Enemy.States.Following
 {
     public class CalmTimer : IToggle
     {
-        private readonly CooldownTimer _timer;
         private readonly IStateMachine _stateMachine;
+        private readonly CooldownTimer _timer;
 
         public CalmTimer(CooldownTimer timer, IStateMachine stateMachine)
         {

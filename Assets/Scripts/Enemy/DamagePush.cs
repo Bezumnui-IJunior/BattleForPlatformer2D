@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Entity;
-using Entity.Trackers;
+﻿using Entity;
 using Misc;
 using UnityEngine;
 
@@ -13,12 +11,12 @@ namespace Enemy
     {
         [SerializeField] private Vector2 _directionForce;
         [SerializeField] private float _freezeSeconds = 0.5f;
+        private CooldownTimer _freezeTimer;
 
         private EntityHealth _health;
-        private Rigidbody2D _rigidbody;
 
         private IMover _mover;
-        private CooldownTimer _freezeTimer;
+        private Rigidbody2D _rigidbody;
 
         private void Awake()
         {
@@ -38,7 +36,6 @@ namespace Enemy
         {
             _health.Damaged -= OnDamage;
             _freezeTimer.Freed -= _mover.Enable;
-
         }
 
         private void OnDamage(IAttacker attacker)
@@ -48,7 +45,5 @@ namespace Enemy
             _mover.Disable();
             _freezeTimer.Start();
         }
-
-     
     }
 }

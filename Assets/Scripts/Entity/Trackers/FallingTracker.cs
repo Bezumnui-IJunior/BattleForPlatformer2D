@@ -10,15 +10,15 @@ namespace Entity.Trackers
         private readonly Rigidbody2D _rigidbody;
 
         private bool _isLastFall;
-        
-        public event Action FallingStarting;
-        public event Action FallingStopped;
-        
+
         public FallingTracker(Rigidbody2D rigidbody, float fallThreshold)
         {
             _rigidbody = rigidbody;
             _fallThreshold = fallThreshold;
         }
+
+        public event Action FallingStarting;
+        public event Action FallingStopped;
 
         public override void Update()
         {
@@ -32,7 +32,9 @@ namespace Entity.Trackers
             _isLastFall = isFall;
         }
 
-        private bool IsFall() =>
-            _rigidbody.linearVelocityY < -_fallThreshold;
+        private bool IsFall()
+        {
+            return _rigidbody.linearVelocityY < -_fallThreshold;
+        }
     }
 }

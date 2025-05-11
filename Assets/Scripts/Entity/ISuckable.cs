@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Entity
 {
@@ -7,6 +6,6 @@ namespace Entity
     {
         public Transform Transform { get; }
 
-        public float TakeHealth(float maxHealth);
+        public float Damage(float maxHealth);
     }
 }

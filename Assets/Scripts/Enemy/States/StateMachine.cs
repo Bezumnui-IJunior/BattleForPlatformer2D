@@ -10,8 +10,8 @@ namespace Enemy.States
     public class StateMachine : MonoBehaviour, IStateMachine
     {
         private State _currentState;
-        private State _patrolling;
         private State _followingTarget;
+        private State _patrolling;
 
         private Dictionary<Type, State> _states;
 
@@ -44,7 +44,9 @@ namespace Enemy.States
             state.Occupy();
         }
 
-        private void SetDefaultState() =>
+        private void SetDefaultState()
+        {
             ChangeState<PatrollingState>();
+        }
     }
 }

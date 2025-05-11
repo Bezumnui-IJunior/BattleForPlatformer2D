@@ -26,11 +26,14 @@ namespace Entity
             Motion = new EntityMotion(mover, Rotator, motionAnimator, Tracker);
         }
 
-        private void OnEnable() =>
+        private void OnEnable()
+        {
             Motion.OnEnable();
+        }
 
-        private void OnDisable() =>
+        private void OnDisable()
+        {
             Motion.OnDisable();
-
+        }
     }
 }

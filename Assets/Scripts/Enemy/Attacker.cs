@@ -12,14 +12,15 @@ namespace Enemy
         private const float MaxDamage = 15;
 
         private Enemy _enemy;
-
-        public Transform Transform => _enemy.transform;
         private IAttackTracker AttackTracker => _enemy.EnemyTracker.Attack;
-
+        public Transform Transform => _enemy.transform;
+        
         private void Awake()
         {
             _enemy = GetComponent<Enemy>();
         }
+
+        
 
         public void Attack()
         {

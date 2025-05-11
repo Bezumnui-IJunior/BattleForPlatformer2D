@@ -12,11 +12,6 @@ namespace Player.Trackers
 
         public ISuckTracker Suck => _suck;
 
-        public void Initialize()
-        {
-            _suck = new SuckTracker(this, _suckCount, _suckCooldownSeconds, _suckSeconds);
-        }
-
         private void OnEnable()
         {
             _suck.Enable();
@@ -25,6 +20,11 @@ namespace Player.Trackers
         private void OnDisable()
         {
             _suck.Disable();
+        }
+
+        public void Initialize()
+        {
+            _suck = new SuckTracker(this, _suckCount, _suckCooldownSeconds, _suckSeconds);
         }
     }
 }

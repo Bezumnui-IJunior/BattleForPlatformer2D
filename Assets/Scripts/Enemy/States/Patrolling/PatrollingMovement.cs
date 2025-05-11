@@ -25,10 +25,14 @@ namespace Enemy.States.Patrolling
             _enemy.Motion.GoWithSpeed(transform.right.x);
         }
 
-        public void Enable() =>
+        public void Enable()
+        {
             enabled = true;
+        }
 
-        public void Disable() =>
+        public void Disable()
+        {
             enabled = false;
+        }
     }
 }
